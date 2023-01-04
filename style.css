@@ -95,6 +95,7 @@ h3 {
 header {
     gap: 1rem;
     padding: 0rem 2rem 0rem 2rem;
+    animation: fade-in 1.25s ease-in;
 }
 header > .mb-2 {
     margin-bottom: 0!important;
