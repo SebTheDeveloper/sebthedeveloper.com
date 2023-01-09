@@ -6,7 +6,6 @@ const nextBtn = document.querySelectorAll('.see-next');
 const getInTouch = document.querySelector('#get-in-touch');
 let welcomeMessage = 'Hi, my name is Sebastian.';
 
-
 document.querySelector('.color-fade').onclick = (e) => {
     body.classList.toggle('color-mode-toggle');
     const root = document.querySelector(':root');
@@ -29,11 +28,11 @@ document.querySelector('.color-fade').onclick = (e) => {
         element.classList.toggle('header-links');
     });
 }
+
 let darkModeDefault = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if(darkModeDefault) {
     document.querySelector('.color-fade').click()
 }
-
 
 typewriter = () => {
     const h1 = document.querySelector('h1');
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', typewriter);
 let picCount = 0;
 let picArray = ['/images/examples/example1.png', '/images/examples/example2.png', '/images/examples/example3.png', '/images/examples/example4.png', '/images/examples/example5.png'];
 let projectTitle = ['Calculator App', 'Title 2', 'Title 3', 'Title 4', 'Title 5'];
-updateCurrentProject();
+
 nextBtn.forEach(btn => {
     btn.addEventListener('click', () => {
         if (picCount == picArray.length - 1) {
@@ -71,6 +70,7 @@ nextBtn.forEach(btn => {
     });
 });
 
+updateCurrentProject();
 
 projectModal.style.display = 'none';
 document.querySelectorAll('.view-project-btn').forEach(element => {
@@ -86,7 +86,6 @@ document.querySelectorAll('.view-project-btn').forEach(element => {
     }
 });
 
-
 modalBackBtn.forEach((btn) => {
     btn.addEventListener('click', () => {
         projectModal.classList.add('fade');
@@ -99,7 +98,6 @@ modalBackBtn.forEach((btn) => {
         });
     });
 });
-
 
 function updateCurrentProject() {
     const h2 = document.querySelectorAll('h2');
