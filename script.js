@@ -31,10 +31,13 @@ document.querySelector(".color-fade").onclick = (e) => {
   });
 };
 
-let darkModeDefault = window.matchMedia("(prefers-color-scheme: dark)").matches;
-if (darkModeDefault) {
-  document.querySelector(".color-fade").click();
-}
+// let darkModeDefault = window.matchMedia("(prefers-color-scheme: dark)").matches;
+// if (darkModeDefault) {
+//   document.querySelector(".color-fade").click();
+// }
+
+// Default to dark mode
+document.querySelector(".color-fade").click();
 
 typewriter = () => {
   const h1 = document.querySelector("h1");
@@ -43,14 +46,25 @@ typewriter = () => {
   if (typewriterIndex++ != welcomeMessage.length) {
     setTimeout(typewriter, 70);
   } else {
-    if (welcomeMessage == "Hi, my name is Sebastian.") {
-      welcomeMessage = "Here is some of my work:";
-      typewriterIndex = 0;
-      setTimeout(typewriter, 1300);
-    } else {
-      const main = document.querySelector(".main");
-      main.style.display = "block";
-    }
+    // if (welcomeMessage == "Hi, my name is Sebastian.") {
+    //   welcomeMessage = "Take a look at my portfolio:";
+    //   typewriterIndex = 0;
+    //   setTimeout(typewriter, 60);
+    // } else {
+    //   const main = document.querySelector(".main");
+    //   main.style.display = "block";
+    // }
+    let style = document.createElement("style");
+    style.innerHTML = `
+        h1::after {
+          transition: opacity 0.3s ease-in-out;
+          opacity: 0;
+        }
+      `;
+    document.head.appendChild(style);
+
+    const main = document.querySelector(".main");
+    main.style.display = "block";
   }
 };
 let typewriterIndex = 0;
@@ -90,7 +104,7 @@ projectModal.style.display = "none";
 document.querySelectorAll(".view-project-btn").forEach((element) => {
   element.onclick = () => {
     if (body.classList.contains("color-mode-toggle")) {
-      projectModal.style.backgroundColor = "rgb(37, 37, 37)";
+      projectModal.style.backgroundColor = "rgb(8, 8, 8)";
     } else {
       projectModal.style.backgroundColor = "rgb(243, 243, 243)";
     }
