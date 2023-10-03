@@ -1,0 +1,157 @@
+import projectsData from "./data/projectsData.js";
+
+console.log(projectsData);
+
+const body = document.querySelector("body");
+const projectModal = document.querySelector(".project-set-modal");
+const logo = document.querySelector(".logo");
+const nextBtn = document.querySelectorAll(".see-next");
+const exitModal = projectModal.querySelector(".exit-modal");
+const getInTouch = document.querySelector("#get-in-touch");
+
+document.querySelector(".color-fade").onclick = (e) => {
+  body.classList.toggle("color-mode-toggle");
+  const root = document.querySelector(":root");
+  // Dark mode
+  if (body.classList.contains("color-mode-toggle")) {
+    logo.src = "../img/SebDoubleU-icon-dark-mode.png";
+    e.target.src = "../img/svg/dark-mode.svg";
+    root.style.setProperty("--link-text", "var(--white)");
+    root.style.setProperty("--gray", "#585858");
+    exitModal.style.color = "var(--white)";
+  }
+  // Light Mode
+  else {
+    logo.src = "../img/SebDoubleU-icon.png";
+    e.target.src = "../img/svg/light-mode.svg";
+    root.style.setProperty("--link-text", "#212529");
+    root.style.setProperty("--gray", "#8297b7");
+    exitModal.style.color = "var(--red)";
+  }
+  document
+    .querySelector(".btn-outline-secondary")
+    .classList.toggle("dark-mode-button");
+  document.querySelectorAll(".link-dark").forEach((element) => {
+    element.classList.toggle("header-links");
+  });
+};
+
+// Default to dark mode
+document.querySelector(".color-fade").click();
+
+function typeWriterEffect(element, message, interval) {
+  return new Promise((resolve) => {
+    let index = 0;
+
+    function type() {
+      if (index < message.length) {
+        element.textContent += message.charAt(index);
+        index++;
+        setTimeout(type, interval);
+      } else {
+        resolve();
+      }
+    }
+
+    type();
+  });
+}
+
+function backspaceEffect(element, interval) {
+  return new Promise((resolve) => {
+    let message = element.textContent;
+
+    function backspace() {
+      if (message.length > 1) {
+        message = message.substring(0, message.length - 1);
+        element.textContent = message;
+        setTimeout(backspace, interval);
+      } else {
+        resolve();
+      }
+    }
+
+    backspace();
+  });
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function executeTypewriterSequence() {
+  const h1 = document.querySelector("h1");
+  h1.classList.add("typewriter");
+
+  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 70);
+  await delay(1300);
+  await backspaceEffect(h1, 50);
+  await delay(500);
+  await typeWriterEffect(h1, "ere are some projects that I've created:", 70);
+
+  h1.classList.remove("typewriter");
+  document.querySelector(".main").style.display = "block";
+}
+
+executeTypewriterSequence();
+
+let projectIndex = 0;
+
+nextBtn.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (projectIndex == projectsData.length - 1) {
+      projectIndex = 0;
+      updateCurrentProject();
+    } else {
+      projectIndex++;
+      updateCurrentProject();
+    }
+  });
+});
+
+updateCurrentProject();
+
+projectModal.style.display = "none";
+document.querySelectorAll(".view-project-btn").forEach((element) => {
+  element.onclick = () => {
+    if (body.classList.contains("color-mode-toggle")) {
+      projectModal.style.backgroundColor = "rgb(8, 8, 8)";
+    } else {
+      projectModal.style.backgroundColor = "rgb(243, 243, 243)";
+    }
+    document.querySelector("html").style.overflowY = "hidden";
+    projectModal.style.overflowY = "scroll";
+    projectModal.style.display = "flex";
+    updateCurrentProject();
+  };
+});
+
+projectModal.addEventListener("click", (e) => {
+  const contentClasses = [".curr-project", ".project-card-bottom", ".see-next"];
+
+  if (
+    !e.target.matches(contentClasses.join(", ")) &&
+    !e.target.closest(contentClasses.join(", "))
+  ) {
+    projectModal.style.overflowY = "hidden";
+    document.querySelector("html").style.overflowY = "scroll";
+
+    projectModal.classList.add("fade");
+    projectModal.addEventListener("animationend", () => {
+      if (projectModal.classList.contains("fade")) {
+        projectModal.style.display = "none";
+      }
+      projectModal.classList.remove("fade");
+    });
+  }
+});
+
+function updateCurrentProject() {
+  const h2 = document.querySelectorAll("h2");
+  document.querySelector(".img-carousel").src = projectsData[projectIndex].img;
+  document.querySelector(".curr-project").src = projectsData[projectIndex].img;
+  document.querySelector(".curr-num").textContent = `0${projectIndex + 1}`;
+  h2.forEach((h2) => {
+    h2.textContent = projectsData[projectIndex].title;
+  });
+}

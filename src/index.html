@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js" defer></script>
+    <script type="module" src="js/script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -15,10 +15,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600;700&family=Roboto:ital,wght@0,100;0,300;1,300&family=Rubik:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&family=Roboto+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.png" />
     <title>SebDoubleU</title>
   </head>
   <body>
@@ -27,7 +27,7 @@
         <div class="modal-back-btn exit-modal">&#10006;</div>
         <div class="modal-card">
           <img
-            src="images/examples/example3.png"
+            src="img/examples/example3.png"
             height="400px"
             alt="Picture of project"
             class="curr-project"
@@ -40,16 +40,16 @@
             </h3>
           </div>
         </div>
-        <button class="see-next">next</button>
+        <button class="see-next btn btn-primary">next</button>
       </div>
       <header
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
       >
         <a
-          href=""
+          href="javascript:void(0)"
           class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
         >
-          <img src="/images/SebDoubleU-icon.png" class="logo" alt="logo" />
+          <img src="img/SebDoubleU-icon.png" class="logo" alt="logo" />
         </a>
         <div class="header-links">
           <ul
@@ -57,7 +57,7 @@
           >
             <li>
               <a
-                href="#"
+                href="javascript:void(0)"
                 class="nav-link px-2 link-dark view-project-btn nav-item"
                 id="portfolio"
                 >Portfolio</a
@@ -74,7 +74,7 @@
             </li>
           </ul>
           <img
-            src="./images/svg/light-mode.svg"
+            src="./img/svg/light-mode.svg"
             alt="color mode"
             class="color-fade"
           />
@@ -113,16 +113,16 @@
               </button>
             </div>
           </div>
-          <div class="container px-5">
+          <div class="container px-5 mt-5">
             <img
               src=""
-              class="custom-img-height img-fluid rounded-3 shadow-lg mb-4 img-carousel view-project-btn"
+              class="custom-img-height img-fluid rounded-3 shadow-lg mb-5 img-carousel view-project-btn"
               alt="Projects"
               loading="lazy"
             />
-            <h2 style="font-weight: 500"></h2>
+            <h2 style="opacity: 0.9"></h2>
           </div>
-          <p style="margin-top: 4rem" class="lead mb-4" id="portfolio-text">
+          <!-- <p style="margin-top: 4rem" class="lead mb-4" id="portfolio-text">
             I'm a full-stack developer skilled in JavaScript/TypeScript, NodeJS,
             React, HTML, CSS, MongoDB, PostgreSQL, NextJS, Linux, Nginx, Git and
             beyond. I am passionate about developing clean and intuitive user
@@ -133,7 +133,7 @@
             distinctly in projects such as AI News Buddy, Sensory Play Days on
             Ezer Farm, and the array of landing pages and company websites I've
             had the privilege to design and develop.
-          </p>
+          </p> -->
         </div>
       </div>
     </div>

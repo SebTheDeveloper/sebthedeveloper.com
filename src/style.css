@@ -1,12 +1,12 @@
 :root {
   --primary-blue: #0d6efd;
-  --white: rgb(243, 243, 243);
+  --white: rgb(240, 240, 240);
   --link-text: #212529;
-  --modal-width: 700px;
+  --modal-width: 800px;
   --red: #e70000;
   --gray: #8297b7;
   --darkGreyBlue: rgb(15 16 21);
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 html {
   overflow-y: scroll;
@@ -14,6 +14,9 @@ html {
 body {
   background-color: var(--white) !important;
   transition: background-color 0.5s ease-in-out;
+}
+header > * {
+  animation: slide-down 0.6s cubic-bezier(0.25, 1.5, 0.5, 1);
 }
 .color-mode-toggle {
   background-color: var(--darkGreyBlue) !important;
@@ -63,9 +66,13 @@ body {
   width: var(--modal-width);
   margin-top: 1rem;
 }
+.curr-project,
+.project-card-bottom {
+  animation: slide-down 0.4s cubic-bezier(0.25, 1.5, 0.5, 1);
+}
 .project-card-bottom {
   background-color: var(--darkGreyBlue);
-  color: rgb(240,240,240);
+  color: rgb(240, 240, 240);
   position: absolute;
   width: 100%;
   border-radius: 0 0 7px 7px;
@@ -79,15 +86,16 @@ body {
   border-radius: 7px;
 }
 h1 {
-  padding: 1.5rem 6rem;
-  font-family: monospace;
   position: relative;
-  margin-bottom: 3rem !important;
+  margin: 1.5rem 6rem 3rem !important;
   font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  min-height: 1em;
 }
-h1::after {
+.typewriter::after {
   content: "";
   position: absolute;
+  bottom: 0;
   display: inline-block;
   background-color: #777;
   width: 6px;
@@ -97,10 +105,11 @@ h1::after {
 }
 h2,
 h3 {
-  font-family: "Rubik", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 h2 {
   font-size: 2.3rem !important;
+  font-weight: 500 !important;
 }
 h3 {
   font-weight: 300 !important;
@@ -116,7 +125,6 @@ h3 {
 header {
   gap: 1rem;
   padding: 0rem 2rem 0rem 2rem;
-  animation: fade-in 1.25s ease-in;
 }
 header > .mb-2 {
   margin-bottom: 0 !important;
@@ -132,7 +140,7 @@ header > .mb-2 {
 #blog::after {
   display: inline-block;
   content: "";
-  background: center / contain no-repeat url("./images/svg/blog.svg");
+  background: center / contain no-repeat url("./img/svg/blog.svg");
   width: 15px;
   height: 15px;
   margin-left: 0.3rem;
@@ -140,7 +148,7 @@ header > .mb-2 {
 #portfolio:after {
   display: inline-block;
   content: "";
-  background: center / contain no-repeat url("./images/svg/portfolio.svg");
+  background: center / contain no-repeat url("./img/svg/portfolio.svg");
   width: 15px;
   height: 15px;
   margin-left: 0.3rem;
@@ -148,7 +156,7 @@ header > .mb-2 {
 #github::after {
   display: inline-block;
   content: "";
-  background: center / contain no-repeat url("./images/svg/github.svg");
+  background: center / contain no-repeat url("./img/svg/github.svg");
   width: 15px;
   height: 15px;
   margin-left: 0.3rem;
@@ -156,10 +164,6 @@ header > .mb-2 {
 .nav-link.nav-item:hover {
   color: var(--primary-blue) !important;
 }
-.img-fluid.custom-img-height {
-  height: 300px;
-}
-
 img.color-fade {
   width: 20px;
   height: 20px;
@@ -185,16 +189,13 @@ img.view-project-btn:hover {
   cursor: pointer;
   transform: scale(1.02);
 }
-.container .px-5 {
-  margin-top: 2rem;
-}
 .main {
+  padding-top: 1rem;
   display: none;
   opacity: 0;
-  animation: fade-in 0.5s ease-in 0.5s forwards;
+  animation: fade-in 0.8s ease-in-out forwards;
 }
 .hero.pt-5 {
-  animation: fade-in 0.75s ease-in;
   padding: 0.75rem !important;
 }
 #portfolio-text {
@@ -218,14 +219,11 @@ img.view-project-btn:hover {
 }
 @keyframes slide-down {
   0% {
-    margin-top: -50px;
+    transform: translateY(-60px);
     opacity: 0;
   }
-  80% {
-    margin-top: 58px;
-  }
   100% {
-    margin-top: 55px;
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -239,7 +237,7 @@ img.view-project-btn:hover {
     flex-direction: column !important;
   }
   h1 {
-    padding: 1rem 4rem;
+    margin: 1rem 2rem 0 !important;
   }
   #project-buttons {
     display: flex;
@@ -265,6 +263,7 @@ img.view-project-btn:hover {
   .curr-project {
     width: 90vw;
     height: auto;
+    margin-top: 2.5rem;
   }
 }
 
