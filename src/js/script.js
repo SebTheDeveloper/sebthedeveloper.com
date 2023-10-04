@@ -175,7 +175,7 @@ function updateCurrentProject() {
       formattedPreviewLinks += `<a href="${link.href}" target="_blank">${link.name}</a>`;
     });
 
-    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedPreviewLinks}</div>`;
+    projectInfoHtml += `<br /> <br /> <span class="label">Demo Project Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedPreviewLinks}</div>`;
 
     let formattedGithubLinks = "";
     project.liveProjectLink.forEach((link) => {

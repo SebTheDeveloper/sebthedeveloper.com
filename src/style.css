@@ -217,8 +217,12 @@ img.view-project-btn:hover {
   display: none;
   animation: slide-left 0.5s ease-in-out;
 }
+#contact-anchor {
+  padding: 5rem 0;
+  margin: 5rem 0;
+}
 #contact {
-  margin: 10rem auto;
+  margin: 0 auto;
   text-align: left;
   padding: 2rem;
   background-color: rgba(5, 5, 5);

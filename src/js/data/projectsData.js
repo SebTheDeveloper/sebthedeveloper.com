@@ -32,14 +32,6 @@ const projectsData = [
     githubLink: "https://github.com/sebdoubleu/ecommerce-grills-shop",
   },
   {
-    title: "Allied Relocation Services",
-    img: "../../img/projects/allied-relocation-services.png",
-    projectType: "Commissioned Work",
-    tech: "WordPress, JavaScript, CSS, Wordpress Plugins",
-    liveProjectLink: "https://alliedrelocationservice.com",
-    githubLink: null,
-  },
-  {
     title: "Landing Pages",
     img: "../../img/projects/landing-pages.png",
     projectType: "Commissioned Work",
@@ -63,6 +55,14 @@ const projectsData = [
           "https://github.com/sebdoubleu/cross-country-movers-landing-page",
       },
     ],
+    githubLink: null,
+  },
+  {
+    title: "Allied Relocation Services",
+    img: "../../img/projects/allied-relocation-services.png",
+    projectType: "Commissioned Work",
+    tech: "WordPress, JavaScript, CSS, Wordpress Plugins",
+    liveProjectLink: "https://alliedrelocationservice.com",
     githubLink: null,
   },
 ];
