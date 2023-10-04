@@ -6,8 +6,8 @@ const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
 const exitModal = projectModal.querySelector(".exit-modal");
 const main = document.querySelector(".main");
+const contactForm = document.getElementById("contact");
 const footer = document.querySelector("footer");
-const getInTouch = document.querySelector("#get-in-touch");
 
 document.querySelector(".color-fade").onclick = (e) => {
   body.classList.toggle("color-mode-toggle");
@@ -18,6 +18,7 @@ document.querySelector(".color-fade").onclick = (e) => {
     e.target.src = "../img/svg/dark-mode.svg";
     root.style.setProperty("--link-text", "var(--white)");
     root.style.setProperty("--gray", "#585858");
+    root.style.setProperty("--foreground", "var(--white)");
     exitModal.style.color = "var(--white)";
   }
   // Light Mode
@@ -27,6 +28,7 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "#212529");
     root.style.setProperty("--gray", "#8297b7");
     exitModal.style.color = "var(--red)";
+    root.style.setProperty("--foreground", "var(--darkGreyBlue)");
   }
   document
     .querySelector(".btn-outline-secondary")
@@ -167,16 +169,30 @@ function updateCurrentProject() {
   <span class="label">Tools & Technologies:</span> ${project.tech}
   `;
 
-  if (project.liveProjectLink) {
-    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Link:</span> <a href="${project.liveProjectLink}" target="_blank">click to view</a>`;
-  }
+  if (Array.isArray(project.liveProjectLink)) {
+    let formattedPreviewLinks = "";
+    project.liveProjectLink.forEach((link) => {
+      formattedPreviewLinks += `<a href="${link.href}" target="_blank">${link.name}</a>`;
+    });
 
-  if (project.githubLink) {
-    projectInfoHtml += `<br /> <br /> <span class="label">GitHub Link:</span> <a href="${project.githubLink}" target="_blank">click to view</a>`;
+    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedPreviewLinks}</div>`;
+
+    let formattedGithubLinks = "";
+    project.liveProjectLink.forEach((link) => {
+      formattedGithubLinks += `<a href="${link.github}" target="_blank">${link.name} | <strong>Github</strong></a>`;
+    });
+
+    projectInfoHtml += `<br /> <span class="label">GitHub Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedGithubLinks}</div>`;
+  } else {
+    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Link:</span> <a href="${project.liveProjectLink}" target="_blank">click to view</a>`;
+
+    if (project.githubLink) {
+      projectInfoHtml += `<br /> <br /> <span class="label">GitHub Link:</span> <a href="${project.githubLink}" target="_blank">click to view</a>`;
+    }
   }
 
   projectInfoHtml += `
-  <div class="d-flex align-items-center justify-content-center mt-4">
+  <div class="d-flex align-items-center justify-content-center mt-5">
   <button class="see-next btn btn-primary">View Next Project</button>
   </div>`;
 
@@ -191,15 +207,21 @@ function onNextClick(event) {
   event.currentTarget.removeEventListener("click", onNextClick);
 }
 
-const observer = new IntersectionObserver((entries, observerInstance) => {
-  if (entries[0].isIntersecting) {
-    const footerPTags = footer.querySelectorAll("p");
+function displayOnIntersect(elementNode, tagsToDisplay) {
+  const observer = new IntersectionObserver((entries, observerInstance) => {
+    if (entries[0].isIntersecting) {
+      const elements = elementNode.querySelectorAll(tagsToDisplay);
 
-    footerPTags.forEach((p) => {
-      p.style.display = "block";
-    });
+      elements.forEach((element) => {
+        element.style.display = "block";
+      });
 
-    observerInstance.unobserve(footer);
-  }
-});
-observer.observe(footer);
+      observerInstance.unobserve(elementNode);
+    }
+  });
+  observer.observe(elementNode);
+}
+
+displayOnIntersect(main.querySelector(".container"), "h2");
+displayOnIntersect(contactForm, "form *");
+displayOnIntersect(footer, "p");

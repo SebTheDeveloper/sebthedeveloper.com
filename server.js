@@ -18,8 +18,21 @@ app.get("/demos/apocalypse-mega-mart", (_, res) => {
   );
 });
 
+app.get("/download-resume", (req, res) => {
+  const filePath = path.join(__dirname, "src", "resume.pdf");
+  res.download(filePath, "resume.pdf", (err) => {
+    if (err) {
+      if (!res.headersSent) {
+        res
+          .status(500)
+          .send("An error occured while downloading resume. Please try again.");
+      }
+    }
+  });
+});
+
 app.get("*", (_, res) => {
-  res.sendFile("index.html");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(port, () => {

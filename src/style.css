@@ -1,6 +1,7 @@
 :root {
   --primary-blue: #0d6efd;
   --white: rgb(240, 240, 240);
+  --foreground: var(var(--white));
   --link-text: #212529;
   --modal-width: 800px;
   --red: #e70000;
@@ -61,10 +62,14 @@ header > * {
 .modal-card {
   position: relative;
   margin-bottom: 15rem;
+  margin-top: 1rem;
+}
+.modal-card,
+.project-card-bottom {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .curr-project {
   width: var(--modal-width);
-  margin-top: 1rem;
 }
 .curr-project,
 .project-card-bottom {
@@ -76,7 +81,16 @@ header > * {
   position: absolute;
   width: 100%;
   border-radius: 0 0 7px 7px;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  margin-bottom: 40rem;
+}
+.multi-link {
+  margin-left: 2.5em;
+  margin-top: 0.5em;
+  gap: 0.25em;
+}
+.project-info a {
+  text-decoration: none;
 }
 .see-next {
   padding: 0.4em 1em;
@@ -125,6 +139,7 @@ h3 {
 header {
   gap: 1rem;
   padding: 0rem 2rem 0rem 2rem;
+  border-bottom: var(--bs-border-width) var(--bs-border-style) var(--foreground) !important;
 }
 header > .mb-2 {
   margin-bottom: 0 !important;
@@ -195,15 +210,43 @@ img.view-project-btn:hover {
   opacity: 0;
   animation: fade-in 0.8s ease-in-out forwards;
 }
+.main h2 {
+  padding: 0 1.5rem 1rem;
+  min-width: 300px;
+  border-bottom: 1px solid var(--foreground);
+  display: none;
+  animation: slide-left 0.5s ease-in-out;
+}
+#contact {
+  margin: 10rem auto;
+  text-align: left;
+  padding: 2rem;
+  background-color: rgba(5, 5, 5);
+  color: var(--white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 7px;
+  overflow: hidden;
+}
+#contact input,
+#contact textarea {
+  margin-bottom: 1rem;
+  border-radius: 7px;
+  padding: 0.6em 0.8em;
+}
+#contact form * {
+  display: none;
+  animation: slide-down 0.5s ease-in-out;
+  width: 100%;
+}
 .hero.pt-5 {
-  padding: 0.75rem !important;
+  padding: 0.75rem 0.75rem 0 !important;
 }
 .curr-num {
   color: #0d6efd;
 }
 .project-info {
-  opacity: 0.95;
-  font-size: 0.9em;
+  opacity: 0.97;
+  font-size: 1em !important;
 }
 .label {
   font-weight: bold;
@@ -212,7 +255,6 @@ img.view-project-btn:hover {
 footer {
   overflow-y: hidden;
   display: none;
-  margin-top: 8rem;
   padding: 2rem;
   letter-spacing: 0.2px;
   border-radius: var(--bs-border-radius-lg);
@@ -249,6 +291,16 @@ footer p {
   }
   100% {
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
     opacity: 1;
   }
 }
@@ -289,10 +341,12 @@ footer p {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
   }
+  .modal-card {
+    margin-top: 2.5rem;
+  }
   .curr-project {
     width: 90vw;
     height: auto;
-    margin-top: 2.5rem;
   }
   .about {
     margin: 8rem 0;
@@ -301,6 +355,14 @@ footer p {
 
 @media (max-width: 460px) {
   h1 {
-    padding: 1rem 1.5rem;
+    padding: 1rem 0;
+    margin: 1rem 0 0 !important;
+  }
+  .main h2 {
+    padding: 0 0 1rem;
+    min-width: 250px;
+  }
+  .project-card-bottom {
+    padding: 1rem;
   }
 }

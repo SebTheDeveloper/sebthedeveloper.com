@@ -27,7 +27,7 @@
         <div class="modal-back-btn exit-modal">&#10006;</div>
         <div class="modal-card">
           <img
-            src="img/examples/example3.png"
+            src=""
             height="400px"
             alt="Picture of project"
             class="curr-project"
@@ -40,7 +40,7 @@
         </div>
       </div>
       <header
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4"
       >
         <a
           href="javascript:void(0)"
@@ -77,16 +77,18 @@
           />
         </div>
         <div class="col-md-3 text-end">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            id="get-in-touch"
-          >
-            Get in touch
-          </button>
+          <a href="#contact">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              id="get-in-touch"
+            >
+              Get in touch
+            </button>
+          </a>
         </div>
       </header>
-      <div class="px-4 pt-5 my-5 text-center hero">
+      <div class="px-4 pt-5 mt-5 text-center hero">
         <h1 class="display-4 fw-bold"></h1>
         <div class="main">
           <div class="col-lg-6 mx-auto">
@@ -110,7 +112,9 @@
               </button>
             </div>
           </div>
-          <div class="container px-5 mt-5">
+          <div
+            class="container px-5 mt-5 d-flex align-items-center justify-content-center flex-column"
+          >
             <img
               src=""
               class="custom-img-height img-fluid rounded-3 shadow-lg mb-5 img-carousel view-project-btn"
@@ -118,6 +122,38 @@
               loading="lazy"
             />
             <h2 style="opacity: 0.95"></h2>
+            <span class="project-underline"></span>
+          </div>
+          <div id="contact" class="col-12 col-lg-10">
+            <form
+              action="/get-in-touch"
+              method="POST"
+              autocomplete="off"
+              class="d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+              <legend class="mb-4 h2">Get in Touch</legend>
+              <label for="name">Your Name:</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+              />
+              <label for="email">Your Email:</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
+              />
+              <label for="message">Message:</label>
+              <textarea
+                name="message"
+                id="message"
+                rows="5"
+                placeholder="Type your message"
+              ></textarea>
+            </form>
           </div>
         </div>
       </div>
@@ -127,7 +163,7 @@
         <p
           style="
             text-align: center;
-            font-size: 1.25em;
+            font-size: 1.5em;
             font-weight: 500;
             margin-bottom: 1.5rem;
           "
