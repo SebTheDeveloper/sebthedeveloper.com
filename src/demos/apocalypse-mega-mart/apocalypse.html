@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Nosifer&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/demos/apocalypse-mega-mart/style.css" />
+    <script
+      type="module"
+      defer
+      src="/demos/apocalypse-mega-mart/js/index.js"
+    ></script>
+    <title>Apocalypse Mega Mart</title>
+  </head>
+  <body>
+    <div class="fog"></div>
+    <div class="background"></div>
+    <main>
+      <h1><span>APOCALYPSE</span> <span>MEGA MART</span></h1>
+      <div class="pick-your-poison">
+        <p class="typewriter">Pick your poison..</p>
+      </div>
+
+      <div class="menu" id="menu">
+        <nav>
+          <ul>
+            <li class="curr-tab" tabindex="0">Food</li>
+            <li tabindex="0">Gear</li>
+          </ul>
+        </nav>
+        <div class="wallet-balance">
+          <p>Wallet Balance: <span class="valid"></span></p>
+        </div>
+        <a href="#menu" class="wallet-balance-top hidden"></a>
+        <div class="menu-inventory"></div>
+      </div>
+    </main>
+  </body>
+</html>

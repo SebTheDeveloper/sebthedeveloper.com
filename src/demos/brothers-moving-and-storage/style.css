@@ -1,0 +1,470 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --green: rgb(83, 179, 65);
+  --red: rgb(193, 39, 45);
+  --gray: rgb(52, 52, 52);
+  --gradient: linear-gradient(180deg, var(--green) 0%, rgb(72, 122, 63) 100%);
+  --gradient-hover: linear-gradient(
+    180deg,
+    var(--green) 0%,
+    rgba(99, 131, 95, 0.788) 100%
+  );
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.success-card,
+.success-card div {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.success-card {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: #30303090;
+  opacity: 0;
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+.success-card div {
+  width: 350px;
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.75rem;
+  gap: 1.5rem;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.801);
+}
+.success-card span {
+  color: var(--green);
+  font-weight: 700;
+}
+.success-card img {
+  width: 200px;
+  transition: all 0.2s ease-in-out;
+}
+.success-card img:hover {
+  transform: scale(0.95);
+}
+.success-card p:nth-of-type(2) {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+.success-card p:nth-of-type(2):hover {
+  opacity: 1;
+}
+.success-card p:nth-of-type(2) a {
+  color: blue;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--gray);
+  box-shadow: 15px 5px 10px #00000050;
+  z-index: 1;
+  padding: 1.5rem 2rem;
+  color: white;
+}
+.logo {
+  width: 275px;
+  margin: 0.5rem 2rem;
+}
+.phone-card {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  grid-template-columns: 1fr 3fr;
+  background-image: var(--gradient);
+  box-shadow: 3px 3px 10px #00000030;
+  padding: 8px 10px;
+  border-radius: 7px;
+  gap: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.phone-card:hover {
+  background-image: var(--gradient-hover);
+  box-shadow: 0 0 2px white;
+}
+.phone-cards {
+  display: flex;
+  gap: 1.5rem;
+}
+.phone-dial {
+  width: 32px;
+  grid-column: span 1;
+}
+.phone-text > p:first-of-type {
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+.call-num {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--blue);
+}
+.phone-text > p:nth-of-type(2) span {
+  font-weight: 500;
+  font-size: 1rem;
+  color: black;
+}
+main {
+  background: radial-gradient(rgb(206, 206, 206), rgb(73, 73, 73)),
+    url("./demos/brothers-moving-and-storage/images/landing-background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3rem;
+  padding: 4rem 10%;
+}
+.hero-left {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  height: 100%;
+  width: 40%;
+  align-items: center;
+  flex-direction: column;
+}
+.hero-text {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+.box img {
+  width: 500px;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  pointer-events: none;
+}
+h1,
+h2 {
+  color: white;
+}
+h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  font-family: "Roboto";
+}
+h2 {
+  font-size: 1.5rem;
+  padding: 0 2rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+h3 {
+  margin: 0.5rem 0 2rem 0;
+  font-size: 2rem;
+}
+h3 span {
+  color: var(--green);
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+  background-color: rgba(40, 40, 40, 0.7);
+  opacity: 0.85;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 8px 5px 15px #00000050;
+  transition: all 0.5s;
+  opacity: 0;
+  animation: fade-in 0.8s ease-in-out forwards;
+}
+.form-wrapper:hover {
+  transform: scale(1.01);
+  opacity: 1;
+  background-color: rgba(40, 40, 40, 0.9);
+}
+.form-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+input,
+select {
+  text-align: center;
+  margin: 1rem 0;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: inset 2px 0 10px #00000060;
+  transition: all 0.5s;
+  font-size: 1rem;
+  padding: 0.8em;
+  color: #4a4a4a;
+  min-width: 100%;
+}
+::placeholder {
+  color: #4a4a4a;
+}
+input {
+  text-align: center;
+}
+input:hover {
+  box-shadow: inset 2px 0 10px #00000090;
+}
+#referral-source {
+  visibility: hidden;
+  position: absolute;
+}
+button {
+  cursor: pointer;
+  color: white;
+  padding: 1.5rem 2rem;
+  background-color: var(--green);
+  border-radius: 2px;
+  border: 0px;
+  margin: 0 5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  grid-column: span 2;
+}
+button:hover {
+  box-shadow: 0px 0px 8px white;
+}
+label {
+  display: block;
+}
+footer {
+  background-color: var(--gray);
+  color: white;
+  padding: 1.75rem 5rem;
+  letter-spacing: 1px;
+  z-index: 1;
+  gap: 1rem;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5rem;
+  width: 100%;
+}
+.right-footer,
+.left-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+.left-footer img {
+  width: 100px;
+}
+.right-footer {
+  margin-left: auto;
+  text-align: right;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.right-footer a:hover,
+.left-footer img:hover {
+  box-shadow: 0 0 3px white;
+}
+.footer-phone {
+  color: var(--green);
+}
+@keyframes rotate-in {
+  0% {
+    transform: scale(0) rotate(360deg);
+  }
+}
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
+@media (max-width: 1600px) {
+  main {
+    padding: 4rem 2rem;
+  }
+  .hero-left {
+    width: auto;
+  }
+  footer {
+    padding: 1.75rem 3rem;
+  }
+  .footer-phone {
+    display: block;
+  }
+  h1 {
+    font-size: 3.5rem;
+  }
+}
+@media (max-width: 1275px) {
+  main {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .box img {
+    display: none;
+  }
+  .form-section {
+    margin-bottom: 1.5rem;
+  }
+  .form-wrapper {
+    padding: 1rem 1.5rem;
+    z-index: 4;
+  }
+  form {
+    justify-items: center;
+  }
+  .inputs,
+  select {
+    width: 100%;
+  }
+  .background {
+    background-size: 250px 250px;
+  }
+  .hero-text {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-size: 3.25rem;
+  }
+  h2 {
+    padding: 0 4rem;
+  }
+  footer {
+    padding: 1.2rem 1rem;
+  }
+}
+@media (max-width: 775px) {
+  header {
+    flex-direction: column;
+    padding: 1.25rem 0;
+  }
+  .phone-card {
+    margin: 1.5rem 0 0 1rem;
+  }
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+  }
+  button.get-my-quote {
+    margin: 0;
+  }
+  input,
+  select {
+    padding: 0.8rem 0;
+    font-size: 0.8rem;
+  }
+  .footer-text {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  footer {
+    padding: 1.2rem 4rem;
+  }
+  .right-footer,
+  .left-footer {
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .right-footer {
+    margin-left: 0;
+  }
+  .footer-phone {
+    display: inline;
+  }
+  main {
+    background: radial-gradient(rgba(119, 119, 119, 0.425), rgba(0, 0, 0, 0.5)),
+      url("./demos/brothers-moving-and-storage/images/moving-boxes-girl.jpeg");
+    padding: 1rem 0.5rem;
+  }
+  button {
+    margin: 0 8rem;
+  }
+}
+@media (max-width: 560px) {
+  input,
+  select {
+    padding: 0.8rem 0;
+    font-size: 1rem;
+  }
+  label {
+    font-size: 1.25rem;
+  }
+  main {
+    padding: 1rem 0;
+  }
+  .hero-left {
+    padding: 0 1rem;
+  }
+  .form-wrapper {
+    padding: 1rem 0;
+    width: 95vw;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  form {
+    justify-items: center;
+  }
+  .inputs {
+    grid-column: span 2;
+    width: 100%;
+  }
+  button {
+    margin: 0 5rem;
+  }
+  .footer-phone {
+    display: block;
+  }
+  .phone-cards {
+    display: block;
+  }
+}

@@ -1,12 +1,12 @@
 import projectsData from "./data/projectsData.js";
 
-console.log(projectsData);
-
 const body = document.querySelector("body");
 const projectModal = document.querySelector(".project-set-modal");
 const logo = document.querySelector(".logo");
-const nextBtn = document.querySelectorAll(".see-next");
+const nextBtn = document.querySelector(".see-next");
 const exitModal = projectModal.querySelector(".exit-modal");
+const main = document.querySelector(".main");
+const footer = document.querySelector("footer");
 const getInTouch = document.querySelector("#get-in-touch");
 
 document.querySelector(".color-fade").onclick = (e) => {
@@ -90,23 +90,26 @@ async function executeTypewriterSequence() {
   await typeWriterEffect(h1, "ere are some projects that I've created:", 70);
 
   h1.classList.remove("typewriter");
-  document.querySelector(".main").style.display = "block";
+  main.style.display = "block";
+  footer.style.display = "block";
 }
 
 executeTypewriterSequence();
 
 let projectIndex = 0;
 
-nextBtn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (projectIndex == projectsData.length - 1) {
-      projectIndex = 0;
-      updateCurrentProject();
-    } else {
-      projectIndex++;
-      updateCurrentProject();
-    }
-  });
+function loadNextProject() {
+  if (projectIndex === projectsData.length - 1) {
+    projectIndex = 0;
+    updateCurrentProject();
+  } else {
+    projectIndex++;
+    updateCurrentProject();
+  }
+}
+
+nextBtn.addEventListener("click", () => {
+  loadNextProject();
 });
 
 updateCurrentProject();
@@ -147,11 +150,56 @@ projectModal.addEventListener("click", (e) => {
 });
 
 function updateCurrentProject() {
-  const h2 = document.querySelectorAll("h2");
-  document.querySelector(".img-carousel").src = projectsData[projectIndex].img;
-  document.querySelector(".curr-project").src = projectsData[projectIndex].img;
-  document.querySelector(".curr-num").textContent = `0${projectIndex + 1}`;
-  h2.forEach((h2) => {
-    h2.textContent = projectsData[projectIndex].title;
+  const project = projectsData[projectIndex];
+
+  document.querySelectorAll("h2").forEach((h2) => {
+    h2.textContent = project.title;
   });
+
+  document.querySelector(".img-carousel").src = project.img;
+  document.querySelector(".curr-project").src = project.img;
+  document.querySelector(".curr-num").textContent = `0${projectIndex + 1}`;
+
+  let projectInfoHtml = `
+  <br />
+  <span class="label">Project Type:</span> ${project.projectType}
+  <br /> <br />
+  <span class="label">Tools & Technologies:</span> ${project.tech}
+  `;
+
+  if (project.liveProjectLink) {
+    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Link:</span> <a href="${project.liveProjectLink}" target="_blank">click to view</a>`;
+  }
+
+  if (project.githubLink) {
+    projectInfoHtml += `<br /> <br /> <span class="label">GitHub Link:</span> <a href="${project.githubLink}" target="_blank">click to view</a>`;
+  }
+
+  projectInfoHtml += `
+  <div class="d-flex align-items-center justify-content-center mt-4">
+  <button class="see-next btn btn-primary">View Next Project</button>
+  </div>`;
+
+  document.querySelector(".project-info").innerHTML = projectInfoHtml;
+
+  const seeNextBtn = projectModal.querySelector(".see-next");
+  seeNextBtn.addEventListener("click", onNextClick);
 }
+
+function onNextClick(event) {
+  loadNextProject();
+  event.currentTarget.removeEventListener("click", onNextClick);
+}
+
+const observer = new IntersectionObserver((entries, observerInstance) => {
+  if (entries[0].isIntersecting) {
+    const footerPTags = footer.querySelectorAll("p");
+
+    footerPTags.forEach((p) => {
+      p.style.display = "block";
+    });
+
+    observerInstance.unobserve(footer);
+  }
+});
+observer.observe(footer);

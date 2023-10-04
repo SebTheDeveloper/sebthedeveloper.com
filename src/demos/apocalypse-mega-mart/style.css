@@ -1,0 +1,618 @@
+/* Manual Reset */
+body,
+h1,
+ul,
+li,
+p,
+a {
+  margin: 0;
+  padding: 0;
+}
+h1,
+.pick-your-poison,
+li,
+.description,
+#menu-image,
+.wallet-balance,
+.wallet-balance-top {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+:root {
+  --orange: rgb(233, 143, 0);
+  --white: rgb(221, 221, 221);
+  --green: rgb(7, 194, 29);
+  --gray: rgb(201, 201, 201);
+  --shadow: 1px 1px 12px rgba(0, 0, 0, 0.502);
+}
+body {
+  color: rgb(33, 33, 33);
+  font-family: "Allerta Stencil", sans-serif;
+}
+main {
+  padding: 4rem 0;
+  position: relative;
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  color: var(--white);
+  font-size: 1.5rem;
+}
+.background {
+  background-image: radial-gradient(
+      rgba(70, 76, 154, 0.376),
+      rgba(51, 4, 59, 0.565)
+    ),
+    url("./images/blurred-city.jpg");
+  position: fixed;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.background:before {
+  content: "";
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.721),
+    rgba(0, 0, 0, 0)
+  );
+  width: 100%;
+  height: 18rem;
+}
+.fog {
+  background-image: url("./images/fog.gif");
+  background-size: cover;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+h1 {
+  font-family: "Nosifer", cursive;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 4.5rem;
+  color: var(--white);
+  font-weight: 700;
+  z-index: 4;
+  transition: transform 0.5s ease-in-out;
+}
+h1:hover {
+  transform: rotateZ(2deg);
+  color: black;
+}
+h1 span:first-of-type {
+  background-image: linear-gradient(var(--orange) 40%, #c02000);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  opacity: 0;
+  animation: fade-in 1.75s ease-in-out forwards;
+}
+h1 span:last-of-type {
+  display: block;
+  font-family: "Allerta Stencil", sans-serif;
+  font-size: 3.5rem;
+  opacity: 0;
+  animation: fade-in 1.75s ease-in-out 0.5s forwards;
+}
+.pick-your-poison {
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.502);
+  margin-top: 2rem;
+  margin-bottom: auto;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  transform: scale(0);
+  animation: bubble 0.6s ease-in-out 1.25s forwards,
+    up-and-away 0.7s ease-in-out forwards 4s;
+}
+.typewriter {
+  overflow: hidden;
+  border-right: 0.15em solid;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.12em;
+  animation: typing 1.5s steps(40, end) 1.25s,
+    blink-caret 0.75s step-end infinite;
+}
+
+/* Menu */
+.menu {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  margin-bottom: auto;
+  display: none;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgba(0, 0, 0, 0.6);
+  width: min(900px, 100%);
+  border-radius: 10px;
+  opacity: 0;
+  box-shadow: var(--shadow);
+}
+.menu-visible {
+  display: grid;
+  animation: fade-in 1s ease-in-out forwards;
+}
+nav {
+  position: relative;
+  grid-column: span 2;
+  width: 100%;
+}
+nav::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.275);
+}
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: auto;
+}
+li {
+  padding: 1.5em;
+  list-style: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.curr-tab {
+  background-color: rgba(151, 151, 151, 0.584);
+  color: white;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+#continue-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.wallet-balance,
+.wallet-balance-top {
+  font-family: "Nosifer", cursive;
+}
+.wallet-balance {
+  --boxShadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  --textColor: var(--white);
+  font-size: 1.2rem;
+  padding: 1.6rem 1.5rem 0.8rem 1.5rem;
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 4rem;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 4;
+  box-shadow: var(--boxShadow);
+  transition: all 0.2s ease-in-out;
+}
+.wallet-balance:hover {
+  --boxShadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: var(--orange);
+  border-radius: 20px;
+}
+.wallet-balance span {
+  display: block;
+  letter-spacing: 1px;
+  font-size: 1.4em;
+  color: var(--textColor);
+  letter-spacing: 1px;
+}
+.wallet-balance span {
+  transition: all 0.2s ease-in-out;
+}
+.wallet-balance span:hover {
+  transform: scale(1.15);
+}
+.wallet-balance-top {
+  --boxShadow: 0 0 13px rgba(255, 255, 255, 0.3);
+  --textColor: var(--white);
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  background-color: rgba(0, 0, 0, 0.99);
+  color: var(--textColor);
+  box-shadow: var(--boxShadow);
+  padding: 0.2em 1em;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: all 0.4s ease-in-out, color 0.4s ease-in-out 0.4s;
+}
+.valid {
+  --textColor: var(--green);
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.25);
+}
+/* Insufficient funds */
+.invalid {
+  animation: text-pulse-red 1.2s ease-in-out, pulse-red 1.2s ease-in-out;
+}
+.menu-item-invalid {
+  animation: pulse-red 1.2s ease-in-out;
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.wallet-balance-top:hover {
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
+}
+.menu-inventory {
+  flex-direction: column;
+  color: #bfbfbf;
+  grid-column: span 2;
+  gap: 4rem;
+  text-align: center;
+  padding: 4rem;
+}
+.menu-inventory,
+.menu-item,
+.item,
+.description {
+  display: flex;
+  align-items: center;
+}
+.menu-item {
+  --dashed-border-color: #6f6f6f;
+  --boxShadow: 0 0 5px white;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: relative;
+  width: 100%;
+  justify-content: space-around;
+  box-shadow: var(--boxShadow);
+  padding: 2rem;
+  transition: box-shadow 0.1s ease-in-out;
+}
+.menu-item:hover {
+  --dashed-border-color: white;
+  --boxShadow: 0 0 9px white;
+  transform: scale(1.01);
+}
+.menu-item::before {
+  content: "";
+  box-shadow: inset 0 0 190px rgb(21, 40, 92);
+  opacity: 0.65;
+  z-index: -1;
+  filter: blur(40px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.item {
+  justify-content: space-around;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px dashed var(--dashed-border-color);
+}
+.selected-item {
+  box-shadow: 0 0 10px var(--green);
+  border-radius: 10px;
+}
+.selected-item button {
+  color: var(--gray);
+  background-color: rgb(12, 12, 12);
+  border: 1px solid var(--gray);
+}
+.selected-item:hover {
+  box-shadow: 0 0 15px var(--green);
+}
+.selected-item::before {
+  opacity: 1;
+}
+#menu-image {
+  position: relative;
+  width: 200px;
+}
+.description {
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+  font-size: 1.25rem;
+}
+.description > :nth-child(1) {
+  font-size: 1.44em;
+  color: var(--gray);
+}
+.description > :nth-child(2) {
+  color: var(--green);
+}
+button {
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 1em 0.7em;
+  border: 1px solid black;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: var(--gray);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+button:hover {
+  color: var(--orange);
+  background-color: black;
+  border: 1px solid var(--orange);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+}
+button:active {
+  box-shadow: 0 0 4px var(--orange);
+}
+
+.click-for-stats {
+  font-family: "Nosifer", cursive;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--orange);
+  text-decoration: underline;
+}
+.click-for-stats:hover {
+  color: var(--green);
+}
+.stats {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 1rem;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  padding: 2rem;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+.stats:hover {
+  background-color: rgba(0, 0, 0, 97);
+}
+#item-stats {
+  font-family: "Nosifer", cursive;
+  font-size: 1.4em;
+  color: var(--orange);
+  text-decoration: underline;
+}
+.chart-item:first-of-type {
+  padding-top: 1rem;
+}
+.chart-item {
+  display: grid;
+  grid-template-columns: 30% 60% 10%;
+  margin-left: -1rem;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+.chart-item p:last-of-type {
+  font-size: 0.9em;
+}
+.chart-bar {
+  --bar-color: #bcbcbc;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 1.15em;
+  width: 100%;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+  background-color: var(--bar-color);
+}
+.chart-bar::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--green);
+}
+.chart-bar::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--bar-color);
+  animation: bar-fill 2s ease-in-out forwards;
+}
+#level-1::before {
+  width: 20%;
+  opacity: 0.6;
+}
+#level-2::before {
+  width: 40%;
+  opacity: 0.7;
+}
+#level-3::before {
+  width: 60%;
+  opacity: 0.8;
+}
+#level-4::before {
+  width: 80%;
+  opacity: 0.9;
+}
+#level-5::before {
+  width: 100%;
+  opacity: 1;
+}
+.chart-bar#level-5 {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.back-to-top {
+  position: fixed;
+  display: none;
+  cursor: pointer;
+  z-index: 4;
+  bottom: 0;
+  font-family: "Nosifer", cursive;
+  font-size: 1rem;
+  color: var(--orange);
+  background-color: rgb(0, 0, 0);
+  padding: 0.25rem 0.75rem;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  opacity: 0.8;
+  transition: all 0.5s ease-in-out;
+}
+.visible {
+  display: block;
+  animation: visible 0.5s ease-in-out;
+}
+.back-to-top:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in-from-zero {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes visible {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes bubble {
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes up-and-away {
+  100% {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgba(153, 153, 153, 0.684);
+  }
+}
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+  33% {
+    box-shadow: var(--boxShadow);
+  }
+  66% {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    box-shadow: var(--boxShadow);
+  }
+}
+@keyframes text-pulse-red {
+  0% {
+    color: rgba(255, 0, 0, 0.7);
+  }
+  33% {
+    color: var(--textColor);
+  }
+  66% {
+    color: rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    color: var(--textColor);
+  }
+}
+/* Item Stats Animations */
+@keyframes bar-fill {
+  100% {
+    transform: translate(100%);
+  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 900px) {
+  main {
+    padding-top: 2rem;
+  }
+  h1 span:first-of-type {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
+  h1 span:last-of-type {
+    font-size: 2.5rem;
+  }
+  .background {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  h1 span:first-of-type {
+    font-size: 2.6rem;
+  }
+  h1 span:last-of-type {
+    font-size: 2.1rem;
+  }
+  .menu-item {
+    padding: 2rem 1.6rem;
+    width: 85%;
+  }
+  #menu-image {
+    width: 150px;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .stats {
+    font-size: 0.85rem;
+  }
+}
