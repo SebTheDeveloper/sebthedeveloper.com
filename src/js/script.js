@@ -94,6 +94,7 @@ async function executeTypewriterSequence() {
   h1.classList.remove("typewriter");
   main.style.display = "block";
   footer.style.display = "block";
+  document.getElementById("get-in-touch").style.display = "block";
 }
 
 executeTypewriterSequence();
@@ -184,11 +185,26 @@ function updateCurrentProject() {
 
     projectInfoHtml += `<br /> <span class="label">GitHub Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedGithubLinks}</div>`;
   } else {
-    projectInfoHtml += `<br /> <br /> <span class="label">Live Project Link:</span> <a href="${project.liveProjectLink}" target="_blank">click to view</a>`;
+    const isDemo = project.liveProjectLink.startsWith("/demos");
+    projectInfoHtml += `<br /> <br /> <span class="label">${
+      isDemo ? "Demo Project" : "Live Project"
+    } Link:</span> <a href="${project.liveProjectLink}" target="_blank">${
+      isDemo ? "View Demo" : project.liveProjectLink.replace("https://", "")
+    }</a>`;
 
     if (project.githubLink) {
-      projectInfoHtml += `<br /> <br /> <span class="label">GitHub Link:</span> <a href="${project.githubLink}" target="_blank">click to view</a>`;
+      projectInfoHtml += `<br /> <br /> <span class="label">GitHub Link:</span> <a href="${
+        project.githubLink
+      }" target="_blank">${project.githubLink.replace("https://", "")}</a>`;
     }
+  }
+
+  const demoAccount = project.demoAccount;
+  if (demoAccount) {
+    projectInfoHtml += `<br /> <br /> <span class="label">Demo Account <span style="font-weight: 300">- Click to Copy:</span></span> <div class="multi-link d-flex justify-content-center flex-column">
+    <div>Username: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.user}</span></div>
+    <div>Password: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.password}</span></div>
+    </div>`;
   }
 
   projectInfoHtml += `

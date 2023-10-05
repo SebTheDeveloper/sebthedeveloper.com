@@ -19,6 +19,10 @@ app.get("/download-resume", (req, res) => {
   });
 });
 
+app.post("/get-in-touch", (req, res) => {
+  console.log("route reached");
+});
+
 // Demo routes
 
 app.get("/demos/brothers-moving-and-storage", (_, res) => {
