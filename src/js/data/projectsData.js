@@ -6,7 +6,15 @@ const projectsData = [
     tech: "React, MongoDB, Node.js, Express, Node Cron, React Markdown, GPT-4/GPT-3.5 Integration, Cheerio, JavaScript, HTML, CSS",
     liveProjectLink: "https://WebXpert.io",
     githubLink: "https://github.com/sebdoubleu/ai-news-scraper",
-    features: [],
+    videoUrl: "",
+    features: [
+      "Scrape and summarize news articles from techcrunch.com daily.",
+      "Implements an Exponential Backoff algorithm to retry attempts if failed.",
+      "Ask News Buddy a question about any article to start a conversation.",
+      "Save any article to your favorites list. When you ask a question, that article will be added to favorites automatically in order to preserve chat history.",
+      "When you remove an article from favorites, it will automatically forget the chat history. To re-save your chat, simply send another message to the chatbot and the history will save.",
+      "When the AI assistant summarizes an article, it also provides a list of categories related to the article. To filter articles by category, start typing in the filter input box.",
+    ],
   },
   {
     title: "Palm Beach Custom Grillz",
@@ -15,7 +23,14 @@ const projectsData = [
     tech: "TypeScript, React, Vite, Stripe Integration, Bootstrap, Express, Node.js, CSS",
     liveProjectLink: "https://PalmBeachCustomGrillz.com",
     githubLink: "https://github.com/sebdoubleu/ecommerce-grills-shop",
-    features: [],
+    videoUrl: "",
+    features: [
+      "Browse available products and add items to cart.",
+      "Select add-ons for individual items and view pricing options.",
+      "Utilize local storage to track cart items and persist on reload and client-side navigation.",
+      "Require accepting Terms and Conditions prior to checkout.",
+      "Integrate with Stripe API to accept payments and collect shipping information.",
+    ],
   },
   {
     title: "Sensory Play Days on Ezer Farm",
@@ -24,7 +39,15 @@ const projectsData = [
     tech: "Vanilla JavaScript, MongoDB, Node.js, NodeMailer, Express, Express Basic Auth, HTML, CSS",
     liveProjectLink: "https://EzerFarmTN.com",
     githubLink: "https://github.com/sebdoubleu/ezerfarmtn.com",
-    features: [],
+    videoUrl: "",
+    features: [
+      "View and schedule for available play days.",
+      "Select number of children in attendance and provide their names and ages.",
+      "Receive an email upon scheduling with a link to manage/cancel your reservation.",
+      "Management dashboard allows admin user to edit available days and view or cancel reservations (requires authorization).",
+      "Automatic emails sent to admin and customer on reservation status change.",
+      "Utilize query parameters to maintain state when navigating from browser history.",
+    ],
   },
   {
     title: "HTML Email Template Mailer",
@@ -37,7 +60,15 @@ const projectsData = [
       user: "example-user",
       password: "example-password",
     },
-    features: [],
+    videoUrl: "",
+    features: [
+      "Choose from custom email templates and dynamically insert customer info.",
+      "Preview generated email before sending.",
+      "Dynamically include sales representative's contact information in sent email.",
+      `Generate formatted list of customer names and emails from Granot CRM's "Estimates in Process" page.`,
+      "Send multiple emails in bulk with dynamic customer information.",
+      "Insert tracking pixel to know when an email is viewed (IP address may not be accurate if customer is using Gmail, as Gmail utilizes proxy servers to mask this information).",
+    ],
   },
   {
     title: "Apocalypse Survivor Simulator",
@@ -46,7 +77,13 @@ const projectsData = [
     tech: "Vanilla JavaScript, WebPack, EJS, HTML, CSS",
     liveProjectLink: "/demos/apocalypse-mega-mart",
     githubLink: "https://github.com/sebdoubleu/apocalypse-ecommerce",
-    features: [],
+    videoUrl: "",
+    features: [
+      "Select items from Food or Gear section and add to cart.",
+      "Customer is allowed an initial wallet balance and may only purchase supplies up to that amount.",
+      "View survival statistics of each item.",
+      "Cart items are kept in local storage in order to persist state on page reload.",
+    ],
   },
   {
     title: "Landing Pages",
@@ -73,7 +110,14 @@ const projectsData = [
       },
     ],
     githubLink: null,
-    features: [],
+    videoUrl: "",
+    features: [
+      "Submit a request for a long-distance moving quote.",
+      "View company information and branding.",
+      "Call or email for a direct quote.",
+      "Submit customer inquiry to Granot CRM for automatic leads posting (if applicable).",
+      "Alternatively, the company will receive an email through NodeMailer with the customer's quote request information.",
+    ],
   },
   {
     title: "Allied Relocation Services",
@@ -82,7 +126,12 @@ const projectsData = [
     tech: "WordPress, JavaScript, CSS, Wordpress Plugins",
     liveProjectLink: "https://AlliedRelocationService.com",
     githubLink: null,
-    features: [],
+    videoUrl: "",
+    features: [
+      "View company information and services offered.",
+      "Clean and simple UI to promote easy site navigation and seamless user experience.",
+      "Customer may submit a quote request, which the company will receive in an email.",
+    ],
   },
 ];
 

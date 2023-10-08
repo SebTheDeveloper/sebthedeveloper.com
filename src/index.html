@@ -62,7 +62,7 @@
           <div class="project-card-bottom">
             <h3 class="curr-num"></h3>
             <h2></h2>
-            <h3 class="project-info"></h3>
+            <div class="project-info"></div>
           </div>
         </div>
         <span id="copied-popup"
@@ -166,6 +166,7 @@
                 <legend class="mb-4 h2">Get in Touch</legend>
                 <label for="name">Your Name:</label>
                 <input
+                  required
                   type="text"
                   name="name"
                   id="name"
@@ -173,18 +174,24 @@
                 />
                 <label for="email">Your Email:</label>
                 <input
-                  type="text"
+                  required
+                  type="email"
                   name="email"
                   id="email"
                   placeholder="Enter your email"
                 />
                 <label for="message">Message:</label>
                 <textarea
+                  required
+                  type="text"
                   name="message"
                   id="message"
                   rows="5"
                   placeholder="Type your message"
                 ></textarea>
+                <button class="btn btn-primary mt-2" type="submit">
+                  Submit
+                </button>
               </form>
             </div>
           </div>

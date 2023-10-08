@@ -57,7 +57,7 @@ header > * {
 }
 .exit-modal:hover {
   cursor: pointer;
-  color: var(--red);
+  color: var(--red) !important;
 }
 .modal-card {
   position: relative;
@@ -82,11 +82,21 @@ header > * {
   width: 100%;
   border-radius: 0 0 7px 7px;
   padding: 1rem 2rem;
+  letter-spacing: 0.25px;
 }
 .multi-link {
   margin-left: 2.5em;
   margin-top: 0.5em;
   gap: 0.25em;
+}
+.features {
+  margin: 1em 0 2em;
+  gap: 0.5em;
+  list-style-type: circle;
+}
+.divider {
+  border-top: 1px solid var(--white);
+  opacity: 0.5;
 }
 .project-info a {
   text-decoration: none;
@@ -246,6 +256,10 @@ img.view-project-btn:hover {
   animation: slide-down 0.5s ease-in-out;
   width: 100%;
 }
+#contact form button[type="submit"] {
+  max-width: 15rem;
+  margin-right: auto;
+}
 .hero.pt-5 {
   padding: 0.75rem 0.75rem 0 !important;
 }
@@ -253,8 +267,19 @@ img.view-project-btn:hover {
   color: #0d6efd;
 }
 .project-info {
+  line-height: 1.2;
   opacity: 0.97;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Poppins", sans-serif;
+  font-weight: 300 !important;
   font-size: 1em !important;
+  margin: 0.8rem 0 !important;
+}
+.video-wrapper {
+  margin-top: 2rem;
+}
+.video-wrapper video {
+  max-width: 100%;
 }
 .label {
   font-weight: bold;
@@ -395,6 +420,10 @@ footer p {
     max-height: 0;
     margin-top: 0.5rem;
     animation: grow-in 0.75s ease-in-out forwards;
+  }
+  #contact form button[type="submit"] {
+    max-width: 100%;
+    margin-right: 0;
   }
   .container.px-5 {
     padding-left: 0.5rem !important;

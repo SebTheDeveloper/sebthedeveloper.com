@@ -185,7 +185,8 @@ function updateCurrentProject() {
 
     projectInfoHtml += `<br /> <span class="label">GitHub Links:</span> <div class="multi-link d-flex justify-content-center flex-column">${formattedGithubLinks}</div>`;
   } else {
-    const isDemo = project.liveProjectLink.startsWith("/demos");
+    const isDemo =
+      project.liveProjectLink.startsWith("/demos") || project.demoAccount;
     projectInfoHtml += `<br /> <br /> <span class="label">${
       isDemo ? "Demo Project" : "Live Project"
     } Link:</span> <a href="${project.liveProjectLink}" target="_blank">${
@@ -201,10 +202,37 @@ function updateCurrentProject() {
 
   const demoAccount = project.demoAccount;
   if (demoAccount) {
-    projectInfoHtml += `<br /> <br /> <span class="label">Demo Account <span style="font-weight: 300">- Click to Copy:</span></span> <div class="multi-link d-flex justify-content-center flex-column">
+    projectInfoHtml += `<br /> <br /> <span class="label">Demo Account <span style="font-weight: 300; font-size: 0.9em">- Click to Copy:</span></span> <div class="multi-link d-flex justify-content-center flex-column">
     <div>Username: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.user}</span></div>
     <div>Password: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.password}</span></div>
     </div>`;
+  }
+
+  if (project.features.length > 0) {
+    let formattedFeatures = "";
+    for (const feature of project.features) {
+      formattedFeatures += `<li>${feature}</li>`;
+    }
+
+    projectInfoHtml += `
+    <br /> <br />
+    <div class="divider"  style="margin: 1em 0 1.5em"></div>
+    <div class="label">Features:</div>
+    <ul class="features d-flex flex-column">${formattedFeatures}</ul>
+    <div class="divider" style="margin-bottom: 1.5em"></div>
+    `;
+  }
+
+  if (project.videoUrl) {
+    projectInfoHtml += `
+    <div class="video-wrapper d-flex flex-column">
+      <span class="label mb-3">Video Preview:</span>
+      <video autoplay muted loop>
+      <source src="${project.videoUrl}" type="video/mp4">
+      Your browser does not support the video tag.
+      </video>
+    </div>
+  `;
   }
 
   projectInfoHtml += `
