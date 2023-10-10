@@ -202,9 +202,22 @@ function updateCurrentProject() {
 
   const demoAccount = project.demoAccount;
   if (demoAccount) {
-    projectInfoHtml += `<br /> <br /> <span class="label">Demo Account <span style="font-weight: 300; font-size: 0.9em">- Click to Copy:</span></span> <div class="multi-link d-flex justify-content-center flex-column">
+    let accountInfo = `
     <div>Username: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.user}</span></div>
-    <div>Password: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.password}</span></div>
+    <div>Password: <span class="demo-account-info" onclick="copyToClipboard(event)">${demoAccount.password}</span></div>`;
+
+    if (demoAccount.adminDashboard) {
+      accountInfo += `<div>Admin Dashboard: <a class="demo-account-info" href="${
+        demoAccount.adminDashboard
+      }" target="_blank">${demoAccount.adminDashboard.replace(
+        "https://",
+        ""
+      )}</a></div>
+      </div>`;
+    }
+
+    projectInfoHtml += `<br /> <br /> <span class="label">Demo Account <span style="font-weight: 300; font-size: 0.9em">- Click to Copy:</span></span> <div class="multi-link d-flex justify-content-center flex-column">
+    ${accountInfo}
     </div>`;
   }
 
@@ -215,11 +228,17 @@ function updateCurrentProject() {
     }
 
     projectInfoHtml += `
-    <br /> <br />
-    <div class="divider"  style="margin: 1em 0 1.5em"></div>
+    <div class="divider"  style="margin: 3em 0 1.5em"></div>
     <div class="label">Features:</div>
     <ul class="features d-flex flex-column">${formattedFeatures}</ul>
-    <div class="divider" style="margin-bottom: 1.5em"></div>
+    ${
+      project.title === "Sensory Play Days on Ezer Farm"
+        ? `<br />
+        <em>A live demo of this project will be available at <a href="https://ezerfarmtn.com" target="_blank">EzerFarmTN.com</a> until the Summer of 2024. The production site is set to launch afterward.</em>
+        <br /><br />`
+        : ""
+    }
+    <div class="divider" style="margin: 1.5em 0 3em"></div>
     `;
   }
 

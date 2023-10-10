@@ -61,10 +61,8 @@ header > * {
 }
 .modal-card {
   position: relative;
-  margin-bottom: 15rem;
   margin-top: 1rem;
 }
-.modal-card,
 .project-card-bottom {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -90,13 +88,14 @@ header > * {
   gap: 0.25em;
 }
 .features {
-  margin: 1em 0 2em;
+  margin-top: 1em;
+  color: rgba(255, 255, 255, 0.95);
   gap: 0.5em;
   list-style-type: circle;
 }
 .divider {
   border-top: 1px solid var(--white);
-  opacity: 0.5;
+  opacity: 0.4;
 }
 .project-info a {
   text-decoration: none;
@@ -294,7 +293,9 @@ img.view-project-btn:hover {
 }
 #copied-popup {
   display: none;
+  pointer-events: none;
   position: fixed;
+  color: yellow;
   bottom: 0;
   left: 0;
   margin-bottom: 2rem;
