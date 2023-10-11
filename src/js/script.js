@@ -95,7 +95,7 @@ async function executeTypewriterSequence() {
   await typeWriterEffect(h1, "ere are some projects that I've created:", 65);
 
   h1.classList.remove("typewriter");
-  h1.style.setProperty("--backgroundOpacity", "0.15");
+  h1.style.setProperty("--backgroundOpacity", "0.4");
 
   showMain();
 }
@@ -302,6 +302,7 @@ function onTransitionEnd() {
   hideMain();
 
   window.removeEventListener("wheel", preventDefault, { passive: false });
+  window.removeEventListener("touchmove", preventDefault, { passive: false });
   main.removeEventListener("transitionend", onTransitionEnd);
 }
 
@@ -347,6 +348,7 @@ formElement.addEventListener("submit", async (e) => {
   const top = document.getElementById("top");
 
   window.addEventListener("wheel", preventDefault, { passive: false });
+  window.addEventListener("touchmove", preventDefault, { passive: false });
   loadingCircle.style.display = "flex";
 
   try {
@@ -423,7 +425,7 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
   h1.classList.remove("typewriter");
 
   showMain(toggleList);
-  h1.style.setProperty("--backgroundOpacity", "0.15");
+  h1.style.setProperty("--backgroundOpacity", "0.4");
 }
 
 function toggleShowList(list, { show }) {
