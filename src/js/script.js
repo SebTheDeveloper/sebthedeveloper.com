@@ -85,11 +85,11 @@ async function executeTypewriterSequence() {
   const h1 = document.querySelector("h1");
   h1.classList.add("typewriter");
 
-  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 70);
+  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 65);
   await delay(1300);
   await backspaceEffect(h1, 50, 1);
   await delay(500);
-  await typeWriterEffect(h1, "ere are some projects that I've created:", 70);
+  await typeWriterEffect(h1, "ere are some projects that I've created:", 65);
 
   h1.classList.remove("typewriter");
   main.style.display = "block";
@@ -266,7 +266,13 @@ function updateCurrentProject() {
   document.querySelector(".project-info").innerHTML = projectInfoHtml;
 
   const seeNextBtn = projectModal.querySelector(".see-next");
+  // Fix remove at top-
   seeNextBtn.addEventListener("click", onNextClick);
+
+  if (projectModal.style.display != "none") {
+    const modalTopID = document.getElementById("modal-top");
+    modalTopID.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
 function onNextClick(event) {
@@ -302,8 +308,9 @@ formElement.addEventListener("submit", async (e) => {
   const formData = new FormData(e.target);
   const formDataObject = formDataToObject(formData);
 
-  const thanksPopup = document.getElementById("thanks-popup");
-  thanksPopup.style.display = "none";
+  const top = document.getElementById("top");
+  const loadingCircle = document.querySelector(".loading-circle");
+  loadingCircle.style.display = "flex";
 
   try {
     const response = await fetch("/get-in-touch", {
@@ -321,18 +328,24 @@ formElement.addEventListener("submit", async (e) => {
       );
     }
 
+    loadingCircle.style.display = "none";
+    top.scrollIntoView({ behavior: "smooth" });
+
     const firstMessage = `Thanks for reaching out, ${data.name}.`;
     const endingMessage = "I look forward to speaking with you soon.";
     excecuteTypewriterResponseMessage(firstMessage, endingMessage);
   } catch (error) {
+    console.error(`Form Error: ${error}`);
+    loadingCircle.style.display = "none";
+    top.scrollIntoView({ behavior: "smooth" });
+    console.log("now");
+
     const firstMessage = "There was an error submitting the form.";
     const endingMessage = "Please try sending another message.";
     excecuteTypewriterResponseMessage(firstMessage, endingMessage);
   }
 
   formElement.reset();
-  window.location.hash = "";
-  window.location.hash = "top";
 });
 
 function formDataToObject(formData) {
@@ -359,21 +372,19 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
 
   await backspaceEffect(h1, 40, 0);
   await delay(500);
-  await typeWriterEffect(h1, message, 70);
+  await typeWriterEffect(h1, message, 65);
 
   if (endingMessage !== "") {
-    await delay(1750);
+    await delay(2000);
     await backspaceEffect(h1, 50, 0);
     await delay(500);
-    await typeWriterEffect(h1, endingMessage, 70);
+    await typeWriterEffect(h1, endingMessage, 65);
     await delay(200);
   }
 
   h1.classList.remove("typewriter");
 
   toggleShowList(toggleList, { show: true });
-
-  window.location.hash = "";
 }
 
 function toggleShowList(list, { show }) {

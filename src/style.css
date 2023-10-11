@@ -18,6 +18,36 @@ body {
   background-color: var(--white) !important;
   transition: background-color 0.5s ease-in-out;
 }
+.loading-circle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(40, 40, 40, 0.3);
+}
+.load-wheel {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 17px solid rgba(0, 0, 0, 0.9);
+  border-right-color: white;
+  animation: loading-animation 1s linear infinite;
+}
+@keyframes loading-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 header > * {
   animation: fade-in 0.6s ease-in-out;
 }
@@ -182,12 +212,6 @@ header > .mb-2 {
 #portfolio:after {
   background: center / contain no-repeat url("./img/svg/portfolio.svg");
 }
-#home:after {
-  background: center / contain no-repeat url("./img/svg/home-circle.svg");
-}
-#home:after svg {
-  fill: white;
-}
 #github::after {
   display: inline-block;
   content: "";
@@ -308,6 +332,10 @@ footer,
   color: var(--bs-link-hover-color);
 }
 #copied-popup {
+  background-color: rgba(0, 0, 0, 0.95);
+  padding: 0.6em 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.1);
   z-index: 10;
   display: none;
   pointer-events: none;
@@ -316,7 +344,7 @@ footer,
   margin-left: 2rem;
   bottom: 0;
   margin-bottom: 2rem;
-  color: yellow;
+  color: rgb(241, 234, 15);
   animation: slide-right-in-out 2s cubic-bezier(0.52, -0.11, 0.47, 1.22)
     forwards;
 }

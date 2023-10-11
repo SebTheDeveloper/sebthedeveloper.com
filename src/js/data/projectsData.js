@@ -79,7 +79,7 @@ const projectsData = [
     title: "Apocalypse Survivor Simulator",
     img: "../../img/projects/apocalypse-survival-simulator-ecommerce.png",
     projectType: "Personal Project",
-    tech: "Vanilla JavaScript, WebPack, EJS, HTML, CSS",
+    tech: "Vanilla JavaScript, WebPack, HTML, CSS",
     liveProjectLink: "/demos/apocalypse-mega-mart",
     githubLink: "https://github.com/sebdoubleu/apocalypse-ecommerce",
     videoUrl: "",

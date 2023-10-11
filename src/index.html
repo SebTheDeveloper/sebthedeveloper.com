@@ -26,7 +26,7 @@
           .then(function () {
             const copiedSpan = copiedPopup.querySelector("span");
             copiedSpan.textContent = `${
-              eText.includes("user") ? "username" : "password"
+              eText.includes("user") ? "Username" : "Password"
             }`;
             copiedPopup.style.display = "block";
             copiedPopup.addEventListener("animationend", setDisplayNone);
@@ -43,9 +43,12 @@
     </script>
   </head>
   <body id="top">
+    <div class="loading-circle">
+      <div class="load-wheel"></div>
+    </div>
     <div class="container">
-      <span id="thanks-popup"></span>
-      <div class="project-set-modal">
+      <div class="project-set-modal" style="display: none">
+        <div id="modal-top" style="position: absolute; top: 0; left: 0"></div>
         <div class="modal-back-btn exit-modal">&#10006;</div>
         <div class="modal-card">
           <img
@@ -61,7 +64,7 @@
           </div>
         </div>
         <span id="copied-popup"
-          >Demo <span></span> copied to clipboard successfully!</span
+          ><span></span> copied to clipboard successfully!</span
         >
       </div>
       <header
@@ -161,6 +164,7 @@
                 <label for="name">Your Name:</label>
                 <input
                   required
+                  title="Enter your name"
                   type="text"
                   name="name"
                   id="name"
@@ -169,6 +173,7 @@
                 <label for="email">Your Email:</label>
                 <input
                   required
+                  title="What's the best email for you?"
                   type="email"
                   name="email"
                   id="email"
@@ -177,6 +182,7 @@
                 <label for="message">Message:</label>
                 <textarea
                   required
+                  title="Write me a message to get in touch"
                   type="text"
                   name="message"
                   id="message"
