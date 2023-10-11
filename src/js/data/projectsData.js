@@ -120,7 +120,7 @@ const projectsData = [
       "Call or email for a direct quote.",
       "View company information and branding.",
       "Submit a request for a long-distance moving quote.",
-      "Fully responsive and mobile-optimized (as are all of my projects).",
+      "Fully responsive and mobile-optimized (which is true for all of my projects).",
       "Submit customer inquiry to Granot CRM for automatic leads posting (if applicable).",
       "Alternatively, the company will receive an email through NodeMailer with the customer's quote request information.",
     ],

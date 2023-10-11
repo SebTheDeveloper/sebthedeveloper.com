@@ -6,7 +6,7 @@ const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
 const exitModal = projectModal.querySelector(".exit-modal");
 const main = document.querySelector(".main");
-const contactForm = document.getElementById("contact");
+const contactFormWrapper = document.getElementById("contact");
 const footer = document.querySelector("footer");
 
 document.querySelector(".color-fade").onclick = (e) => {
@@ -59,12 +59,12 @@ function typeWriterEffect(element, message, interval) {
   });
 }
 
-function backspaceEffect(element, interval) {
+function backspaceEffect(element, interval, stopBackspaceIndex) {
   return new Promise((resolve) => {
     let message = element.textContent;
 
     function backspace() {
-      if (message.length > 1) {
+      if (message.length > stopBackspaceIndex) {
         message = message.substring(0, message.length - 1);
         element.textContent = message;
         setTimeout(backspace, interval);
@@ -87,12 +87,16 @@ async function executeTypewriterSequence() {
 
   await typeWriterEffect(h1, "Hi, my name is Sebastian.", 70);
   await delay(1300);
-  await backspaceEffect(h1, 50);
+  await backspaceEffect(h1, 50, 1);
   await delay(500);
   await typeWriterEffect(h1, "ere are some projects that I've created:", 70);
 
   h1.classList.remove("typewriter");
   main.style.display = "block";
+  setTimeout(() => {
+    main.style.opacity = "1";
+  }, 200);
+
   footer.style.display = "block";
   document.getElementById("get-in-touch").style.display = "block";
 }
@@ -286,5 +290,108 @@ function displayOnIntersect(elementNode, tagsToDisplay) {
 }
 
 displayOnIntersect(main.querySelector(".container"), "h2");
-displayOnIntersect(contactForm, "form *");
+displayOnIntersect(contactFormWrapper, "form *");
 displayOnIntersect(footer, "p");
+
+// Form submit
+const formElement = contactFormWrapper.querySelector("form");
+
+formElement.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const formDataObject = formDataToObject(formData);
+
+  const thanksPopup = document.getElementById("thanks-popup");
+  thanksPopup.style.display = "none";
+
+  try {
+    const response = await fetch("/get-in-touch", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDataObject),
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        `Server responded with ${response.status}: ${data.message || "Error"}`
+      );
+    }
+
+    const firstMessage = `Thanks for reaching out, ${data.name}.`;
+    const endingMessage = "I look forward to speaking with you soon.";
+    excecuteTypewriterResponseMessage(firstMessage, endingMessage);
+  } catch (error) {
+    const firstMessage = "There was an error submitting the form.";
+    const endingMessage = "Please try sending another message.";
+    excecuteTypewriterResponseMessage(firstMessage, endingMessage);
+  }
+
+  formElement.reset();
+  window.location.hash = "";
+  window.location.hash = "top";
+});
+
+function formDataToObject(formData) {
+  const obj = {};
+  formData.forEach((value, key) => {
+    obj[key] = value;
+  });
+  return obj;
+}
+
+async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
+  const h1 = document.querySelector("h1");
+  h1.classList.add("typewriter");
+
+  const getInTouch = document.querySelector(".col-md-3.text-end a");
+
+  const toggleList = [
+    { element: main },
+    { element: footer },
+    { element: getInTouch, onlyPointerEvents: true },
+  ];
+
+  toggleShowList(toggleList, { show: false });
+
+  await backspaceEffect(h1, 40, 0);
+  await delay(500);
+  await typeWriterEffect(h1, message, 70);
+
+  if (endingMessage !== "") {
+    await delay(1750);
+    await backspaceEffect(h1, 50, 0);
+    await delay(500);
+    await typeWriterEffect(h1, endingMessage, 70);
+    await delay(200);
+  }
+
+  h1.classList.remove("typewriter");
+
+  toggleShowList(toggleList, { show: true });
+
+  window.location.hash = "";
+}
+
+function toggleShowList(list, { show }) {
+  list.forEach(({ element, onlyPointerEvents = false }) => {
+    if (show) {
+      if (onlyPointerEvents) {
+        element.style.pointerEvents = "all";
+      } else {
+        element.style.opacity = "1";
+        element.style.pointerEvents = "all";
+      }
+    } else {
+      if (onlyPointerEvents) {
+        element.style.pointerEvents = "none";
+      } else {
+        element.style.opacity = "0";
+        element.style.pointerEvents = "none";
+      }
+    }
+  });
+}

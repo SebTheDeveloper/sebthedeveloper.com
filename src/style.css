@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&family=Roboto+Mono:wght@500&display=swap");
+
 :root {
   --primary-blue: #0d6efd;
   --white: rgb(240, 240, 240);
@@ -113,6 +115,7 @@ h1 {
   font-family: "Roboto Mono", monospace;
   font-weight: 400;
   min-height: 1em;
+  pointer-events: none;
 }
 .typewriter::after {
   content: "";
@@ -168,13 +171,22 @@ header > .mb-2 {
   height: 15px;
   margin-left: 0.3rem;
 }
-#portfolio:after {
+#portfolio:after,
+#home:after {
   display: inline-block;
   content: "";
-  background: center / contain no-repeat url("./img/svg/portfolio.svg");
   width: 15px;
   height: 15px;
   margin-left: 0.3rem;
+}
+#portfolio:after {
+  background: center / contain no-repeat url("./img/svg/portfolio.svg");
+}
+#home:after {
+  background: center / contain no-repeat url("./img/svg/home-circle.svg");
+}
+#home:after svg {
+  fill: white;
 }
 #github::after {
   display: inline-block;
@@ -195,7 +207,7 @@ img.color-fade {
 img.color-fade:hover {
   cursor: pointer;
 }
-a:has(#get-in-touch) {
+.col-md-3.text-end a {
   text-decoration: none;
 }
 #get-in-touch {
@@ -217,11 +229,15 @@ img.view-project-btn:hover {
   cursor: pointer;
   transform: scale(1.02);
 }
+.main,
+footer,
+.col-md-3.text-end a {
+  transition: opacity 0.8s ease-in-out;
+}
 .main {
   padding-top: 1rem;
   display: none;
   opacity: 0;
-  animation: fade-in 0.8s ease-in-out forwards;
 }
 .main h2 {
   padding: 0 1.5rem 1rem;
@@ -292,14 +308,15 @@ img.view-project-btn:hover {
   color: var(--bs-link-hover-color);
 }
 #copied-popup {
+  z-index: 10;
   display: none;
   pointer-events: none;
   position: fixed;
-  color: yellow;
-  bottom: 0;
   left: 0;
-  margin-bottom: 2rem;
   margin-left: 2rem;
+  bottom: 0;
+  margin-bottom: 2rem;
+  color: yellow;
   animation: slide-right-in-out 2s cubic-bezier(0.52, -0.11, 0.47, 1.22)
     forwards;
 }
