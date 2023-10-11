@@ -74,7 +74,7 @@ header > * {
   animation: fade-in 0.35s ease-in-out;
   flex-direction: column;
   align-items: center;
-  padding: 4rem;
+  padding: 4rem 0rem;
   gap: 1rem;
 }
 .modal-back-btn {
@@ -141,11 +141,26 @@ header > * {
 }
 h1 {
   position: relative;
-  margin: 1.5rem 6rem 3rem !important;
+  display: inline-block;
+  margin: 1.5rem 0 3rem !important;
   font-family: "Roboto Mono", monospace;
   font-weight: 400;
   min-height: 1em;
   pointer-events: none;
+}
+h1::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: rgba(0, 29, 73, var(--opacity, 0));
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: -1;
+  transition: background 0.8s ease-in-out;
 }
 .typewriter::after {
   content: "";
@@ -438,7 +453,7 @@ footer p {
     flex-direction: column !important;
   }
   h1 {
-    margin: 1rem 2rem 0 !important;
+    margin: 1rem 0 !important;
   }
   #project-buttons {
     display: flex;
@@ -489,20 +504,33 @@ footer p {
 
 @media (max-width: 460px) {
   .hero.pt-5 {
-    padding: 0.75rem 0.25rem 0 !important;
+    padding: 0.75rem 0.5rem 0 !important;
   }
   .py-3 {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
   h1 {
+    position: relative;
+    display: inline-block;
     margin: 1.5rem 0 2rem !important;
+    font-size: 2.5rem;
   }
   .main h2 {
+    font-size: 1.75rem !important;
     padding: 0 0 1rem;
     min-width: 250px;
   }
+  #contact {
+    padding: 2.5rem;
+  }
+  #contact-form {
+    padding: 12rem 0;
+  }
+  .curr-project {
+    width: 100vw;
+  }
   .project-card-bottom {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
 }

@@ -99,6 +99,8 @@ async function executeTypewriterSequence() {
 
   footer.style.display = "block";
   document.getElementById("get-in-touch").style.display = "block";
+
+  h1.style.setProperty("--opacity", "0.2");
 }
 
 executeTypewriterSequence();
@@ -266,7 +268,6 @@ function updateCurrentProject() {
   document.querySelector(".project-info").innerHTML = projectInfoHtml;
 
   const seeNextBtn = projectModal.querySelector(".see-next");
-  // Fix remove at top-
   seeNextBtn.addEventListener("click", onNextClick);
 
   if (projectModal.style.display != "none") {
@@ -369,6 +370,7 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
   ];
 
   toggleShowList(toggleList, { show: false });
+  h1.style.setProperty("--opacity", "0");
 
   await backspaceEffect(h1, 40, 0);
   await delay(500);
@@ -385,6 +387,7 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
   h1.classList.remove("typewriter");
 
   toggleShowList(toggleList, { show: true });
+  h1.style.setProperty("--opacity", "0.2");
 }
 
 function toggleShowList(list, { show }) {
