@@ -1,6 +1,7 @@
 import projectsData from "./data/projectsData.js";
 
 const body = document.querySelector("body");
+const loadingCircle = document.querySelector(".loading-circle");
 const projectModal = document.querySelector(".project-set-modal");
 const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
@@ -8,6 +9,8 @@ const exitModal = projectModal.querySelector(".exit-modal");
 const main = document.querySelector(".main");
 const contactFormWrapper = document.getElementById("contact");
 const footer = document.querySelector("footer");
+
+let projectIndex = 0;
 
 document.querySelector(".color-fade").onclick = (e) => {
   body.classList.toggle("color-mode-toggle");
@@ -92,20 +95,34 @@ async function executeTypewriterSequence() {
   await typeWriterEffect(h1, "ere are some projects that I've created:", 65);
 
   h1.classList.remove("typewriter");
-  main.style.display = "block";
-  setTimeout(() => {
-    main.style.opacity = "1";
-  }, 200);
+  h1.style.setProperty("--backgroundOpacity", "0.15");
 
-  footer.style.display = "block";
-  document.getElementById("get-in-touch").style.display = "block";
-
-  h1.style.setProperty("--opacity", "0.2");
+  showMain();
 }
 
 executeTypewriterSequence();
 
-let projectIndex = 0;
+function showMain(toggleList = null) {
+  main.style.display = "block";
+  setTimeout(() => {
+    if (!toggleList) {
+      main.style.opacity = "1";
+    } else {
+      toggleShowList(toggleList, { show: true });
+    }
+  }, 200);
+
+  footer.style.display = "block";
+  document.getElementById("get-in-touch").style.display = "block";
+}
+function hideMain() {
+  main.style.display = "none";
+  main.style.opacity = "0";
+
+  footer.style.display = "none";
+  document.getElementById("get-in-touch").style.display = "none";
+  loadingCircle.style.display = "none";
+}
 
 function loadNextProject() {
   if (projectIndex === projectsData.length - 1) {
@@ -281,6 +298,24 @@ function onNextClick(event) {
   event.currentTarget.removeEventListener("click", onNextClick);
 }
 
+function onTransitionEnd() {
+  hideMain();
+
+  window.removeEventListener("wheel", preventDefault, { passive: false });
+  main.removeEventListener("transitionend", onTransitionEnd);
+}
+
+function afterScroll() {
+  if (window.scrollY === 0) {
+    window.removeEventListener("scroll", afterScroll);
+    main.addEventListener("transitionend", onTransitionEnd);
+  }
+}
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
 function displayOnIntersect(elementNode, tagsToDisplay) {
   const observer = new IntersectionObserver((entries, observerInstance) => {
     if (entries[0].isIntersecting) {
@@ -310,7 +345,8 @@ formElement.addEventListener("submit", async (e) => {
   const formDataObject = formDataToObject(formData);
 
   const top = document.getElementById("top");
-  const loadingCircle = document.querySelector(".loading-circle");
+
+  window.addEventListener("wheel", preventDefault, { passive: false });
   loadingCircle.style.display = "flex";
 
   try {
@@ -329,15 +365,15 @@ formElement.addEventListener("submit", async (e) => {
       );
     }
 
-    loadingCircle.style.display = "none";
     top.scrollIntoView({ behavior: "smooth" });
+    loadingCircle.style.display = "none";
+    window.addEventListener("scroll", afterScroll);
 
     const firstMessage = `Thanks for reaching out, ${data.name}.`;
     const endingMessage = "I look forward to speaking with you soon.";
     excecuteTypewriterResponseMessage(firstMessage, endingMessage);
   } catch (error) {
     console.error(`Form Error: ${error}`);
-    loadingCircle.style.display = "none";
     top.scrollIntoView({ behavior: "smooth" });
     console.log("now");
 
@@ -370,7 +406,7 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
   ];
 
   toggleShowList(toggleList, { show: false });
-  h1.style.setProperty("--opacity", "0");
+  h1.style.setProperty("--backgroundOpacity", "0");
 
   await backspaceEffect(h1, 40, 0);
   await delay(500);
@@ -386,8 +422,8 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
 
   h1.classList.remove("typewriter");
 
-  toggleShowList(toggleList, { show: true });
-  h1.style.setProperty("--opacity", "0.2");
+  showMain(toggleList);
+  h1.style.setProperty("--backgroundOpacity", "0.15");
 }
 
 function toggleShowList(list, { show }) {

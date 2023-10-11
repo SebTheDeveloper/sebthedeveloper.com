@@ -26,6 +26,7 @@ body {
   height: 100%;
   width: 100%;
   z-index: 2000;
+  overflow-y: hidden;
   top: 0;
   right: 0;
   bottom: 0;
@@ -156,7 +157,7 @@ h1::before {
   transform: translate(-50%, -50%);
   width: 90%;
   height: 90%;
-  background: rgba(0, 29, 73, var(--opacity, 0));
+  background: rgba(0, 29, 73, var(--backgroundOpacity, 0));
   border-radius: 50%;
   filter: blur(50px);
   z-index: -1;
