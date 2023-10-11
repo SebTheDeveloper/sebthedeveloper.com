@@ -9,6 +9,31 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve images with caching
+const ONE_DAY_IN_MILLISECONDS = 86400000;
+
+app.use(
+  "/img",
+  express.static(path.join(__dirname, "src", "img"), {
+    maxAge: ONE_DAY_IN_MILLISECONDS,
+  })
+);
+app.use(
+  "/video",
+  express.static(path.join(__dirname, "src", "video"), {
+    maxAge: ONE_DAY_IN_MILLISECONDS,
+  })
+);
+app.use(
+  "/demos/apocalypse-mega-mart/images",
+  express.static(
+    path.join(__dirname, "src", "demos", "apocalypse-mega-mart", "images"),
+    {
+      maxAge: ONE_DAY_IN_MILLISECONDS,
+    }
+  )
+);
+
 app.use(express.static(path.join(__dirname, "src")));
 
 app.get("/download-resume", (_, res) => {
@@ -67,7 +92,6 @@ app.post("/get-in-touch", async (req, res) => {
 });
 
 // Demo routes
-
 app.get("/demos/brothers-moving-and-storage", (_, res) => {
   res.sendFile(
     path.join(__dirname, "src/demos/brothers-moving-and-storage/index.html")
@@ -96,9 +120,8 @@ app.get("/demos/cross-country-movers", (_, res) => {
   );
 });
 
-// Default
 app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "src", "index.html"));
 });
 
 app.listen(port, () => {
