@@ -154,7 +154,7 @@
           />
         </div>
         <div class="col-md-3 text-end">
-          <a href="#contact-anchor">
+          <a href="#contact">
             <button
               type="button"
               class="btn btn-outline-secondary"
@@ -206,28 +206,30 @@
     </div>
     <footer>
       <div class="container col-12 col-lg-8">
-        <p style="font-size: 1.5em; font-weight: 500; margin-bottom: 1.5rem">
-          About Me:
-        </p>
-        <p class="lead">
-          I'm a full-stack developer skilled in JavaScript/TypeScript, NodeJS,
-          React, HTML, CSS, MongoDB, PostgreSQL, NextJS, Linux, Nginx, Git and
-          beyond. I am passionate about developing clean and intuitive user
-          interfaces that offer an engaging user experience.
-          <br /><br />
-          While I have balanced experience in both frontend and backend
-          development, I feel that my front-end skills are highlighted
-          distinctly in projects such as AI News Buddy, Palm Beach Custom
-          Grillz, Sensory Play Days on Ezer Farm, and the array of landing pages
-          and company websites I've had the privilege to design and develop.
-          <br /><br />
-          This portfolio site was not made with a front-end framework due to the
-          need for hosting demo projects locally that were created with vanilla
-          JavaScript. The projects have been changed slightly from production
-          for demonstrative purposes.
-        </p>
-        <div id="contact-anchor">
-          <div id="contact">
+        <span>
+          <p style="font-size: 1.5em; font-weight: 500; margin-bottom: 1.5rem">
+            About Me:
+          </p>
+          <p class="lead">
+            I'm a full-stack developer skilled in JavaScript/TypeScript, NodeJS,
+            React, HTML, CSS, MongoDB, PostgreSQL, NextJS, Linux, Nginx, Git and
+            beyond. I am passionate about developing clean and intuitive user
+            interfaces that offer an engaging user experience.
+            <br /><br />
+            While I have balanced experience in both frontend and backend
+            development, I feel that my front-end skills are highlighted
+            distinctly in projects such as AI News Buddy, Palm Beach Custom
+            Grillz, Sensory Play Days on Ezer Farm, and the array of landing pages
+            and company websites I've had the privilege to design and develop.
+            <br /><br />
+            This portfolio site was not made with a front-end framework due to the
+            need for hosting demo projects locally that were created with vanilla
+            JavaScript. The projects have been changed slightly from production
+            for demonstrative purposes.
+          </p>
+        </span>
+        <div id="contact">
+          <div id="contact-form-wrapper">
             <form
               action="/get-in-touch"
               method="POST"
@@ -275,19 +277,7 @@
               target="_blank"
             >
               <span>
-                <svg
-                  viewBox="0 -3 24 24"
-                  id="meteor-icon-kit__regular-envelope"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M3.74379 2L10.8531 6.9765C11.5417 7.4585 12.4583 7.4585 13.1469 6.9765L20.2562 2H3.74379zM22 3.22066L14.2938 8.615C12.9166 9.5791 11.0834 9.5791 9.70615 8.615L2 3.22066V15C2 15.5523 2.44772 16 3 16H21C21.5523 16 22 15.5523 22 15V3.22066zM3 0H21C22.6569 0 24 1.34315 24 3V15C24 16.6569 22.6569 18 21 18H3C1.34315 18 0 16.6569 0 15V3C0 1.34315 1.34315 0 3 0z"
-                    fill="rgb(240 240 240 / 65%)"
-                  />
-                </svg>
+                <img src="img/svg/envelope.svg" alt="Email Icon">
                 <p>Send Email</p>
               </span>
             </a>
@@ -296,19 +286,7 @@
               href="https://github.com/sebdoubleu"
               target="_blank"
               ><span>
-                <svg
-                  viewBox="0 -0.5 24 24"
-                  id="meteor-icon-kit__regular-github"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M12.2047 0.00001C6.56031 -0.005731 1.74628 4.08615 0.842541 9.6577C-0.061195 15.2293 3.2126 20.6331 8.56941 22.4118C9.14823 22.5177 9.35294 22.1577 9.35294 21.8541C9.35294 21.5506 9.35294 20.8588 9.35294 19.8988C6.14117 20.5977 5.46353 18.3529 5.46353 18.3529C5.25046 17.6572 4.79779 17.0595 4.18588 16.6659C3.14823 15.96 4.27059 15.96 4.27059 15.96C5.00761 16.0641 5.65578 16.5014 6.02823 17.1459C6.34368 17.7179 6.87393 18.1406 7.50179 18.3208C8.12965 18.5009 8.8034 18.4236 9.37411 18.1059C9.41842 17.5252 9.66876 16.9794 10.08 16.5671C7.5247 16.2777 4.84235 15.2894 4.84235 10.92C4.82481 9.7786 5.24688 8.67412 6.02117 7.8353C5.67632 6.84285 5.71662 5.7571 6.13412 4.79295C6.13412 4.79295 7.10117 4.48236 9.29647 5.97177C11.1816 5.45419 13.1713 5.45419 15.0565 5.97177C17.2518 4.48236 18.2118 4.79295 18.2118 4.79295C18.6351 5.74689 18.6854 6.82486 18.3529 7.81412C19.1272 8.65294 19.5493 9.7574 19.5318 10.8988C19.5318 15.3177 16.8424 16.2847 14.28 16.5459C14.8359 17.1047 15.1218 17.8774 15.0635 18.6635C15.0635 20.2024 15.0635 21.4447 15.0635 21.8188C15.0635 22.1929 15.2682 22.4824 15.8541 22.3694C21.1473 20.5447 24.3569 15.1728 23.4554 9.6469C22.5539 4.1211 17.8034 0.04779 12.2047 0.00001z"
-                    fill="rgb(240 240 240 / 65%)"
-                  />
-                </svg>
+                <img src="img/svg/github-white.svg" alt="GitHub Logo">
                 <p>View GitHub</p>
               </span>
             </a>
@@ -318,14 +296,7 @@
               target="_blank"
             >
               <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"
-                    fill="rgb(240 240 240 / 65%)"
-                  />
-                </svg>
+                <img src="img/svg/twitter.svg" alt="Twitter Logo">
                 <p>View Twitter</p>
               </span>
             </a>

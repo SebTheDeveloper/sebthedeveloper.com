@@ -327,28 +327,30 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
-function displayOnIntersect(
-  elementNode,
-  tagsToDisplay,
-  displayValue = "block"
-) {
-  const observer = new IntersectionObserver((entries, observerInstance) => {
-    if (entries[0].isIntersecting) {
-      const elements = elementNode.querySelectorAll(tagsToDisplay);
+function displayOnIntersect(elementNode, tagsToDisplay) {
+  const elementsToObserve = elementNode.querySelectorAll(tagsToDisplay);
 
-      elements.forEach((element) => {
-        element.style.display = displayValue;
-      });
+  const observerCallback = (entries, observerInstance) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        observerInstance.unobserve(entry.target);
+      }
+    });
+  };
 
-      observerInstance.unobserve(elementNode);
-    }
+  const observer = new IntersectionObserver(observerCallback, {
+    threshold: 0.1,
   });
-  observer.observe(elementNode);
+
+  elementsToObserve.forEach((element) => {
+    observer.observe(element);
+  });
 }
 
-displayOnIntersect(main.querySelector(".container"), "h2");
-displayOnIntersect(contactFormWrapper, "form > *", "grid");
-displayOnIntersect(footer, "p");
+displayOnIntersect(footer, ".container > span");
+displayOnIntersect(footer, "#contact");
+displayOnIntersect(footer, ".contact-info");
 
 // Form submit
 const formElement = contactFormWrapper.querySelector("form");

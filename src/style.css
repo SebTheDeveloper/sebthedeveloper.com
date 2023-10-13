@@ -279,23 +279,21 @@ footer,
   padding-top: 1rem;
   display: none;
   opacity: 0;
-  padding-bottom: 15rem;
+  padding-bottom: 14rem;
 }
 .main h2 {
   padding: 0 1.5rem 1rem;
   min-width: 300px;
   border-bottom: 1px solid var(--foreground);
-  display: none;
   animation: slide-left 0.5s ease-in-out;
 }
-#contact-anchor {
-  display: flex;
+#contact {
   align-items: center;
   justify-content: space-between;
   padding: 6rem 0;
   gap: 4rem;
 }
-#contact {
+#contact-form-wrapper {
   text-align: left;
   padding: 3rem 0;
   min-height: 400px;
@@ -337,35 +335,43 @@ footer,
   margin-right: auto;
   font-size: 1em;
 }
-.contact-info > .link-item span svg {
+.contact-info > .link-item span img {
   max-width: 22px;
 }
-#contact input,
-#contact textarea {
+#contact-form-wrapper input,
+#contact-form-wrapper textarea {
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
   margin-bottom: 1rem;
   border-radius: 8px;
   padding: 0.6em 0.8em;
 }
-#contact input::placeholder,
-#contact textarea::placeholder {
+#contact-form-wrapper input::placeholder,
+#contact-form-wrapper textarea::placeholder {
   color: var(--white);
 }
-#contact .inputs {
+#contact-form-wrapper .inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 1em;
 }
-#contact .inputs input {
+#contact-form-wrapper .inputs input {
   grid-column: span 1;
 }
-#contact form > * {
-  display: none;
-  animation: fade-in 0.5s ease-in-out;
+#contact,
+.contact-info,
+.container > span {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#contact,
+.contact-info {
+  display: flex;
+}
+#contact-form-wrapper form > * {
   width: 100%;
 }
-#contact form button {
+#contact-form-wrapper form button {
   max-width: 10rem;
   padding: 0.6em;
   margin-right: auto;
@@ -423,7 +429,7 @@ footer {
   overflow-y: hidden;
   display: none;
   min-height: 400px;
-  padding: 4rem 2rem 0;
+  padding: 6rem 2rem 0;
   letter-spacing: 0.4px;
   border-radius: var(--bs-border-radius-lg);
   background-color: rgb(5, 5, 5);
@@ -433,9 +439,7 @@ footer {
   animation: fade-in 1s ease-in-out;
 }
 footer p {
-  display: none;
   margin: 0;
-  animation: slide-down 0.5s ease-in-out;
 }
 @keyframes fade-in {
   0% {
@@ -506,19 +510,19 @@ footer p {
   }
 }
 @media screen and (max-width: 1300px) {
-  #contact-anchor {
+  #contact {
     flex-direction: column;
     padding-top: 8rem;
   }
-  #contact,
+  #contact-form-wrapper,
   .contact-info {
     width: 100%;
   }
   .contact-info {
     padding: 2rem;
   }
-  #contact input,
-  #contact textarea {
+  #contact-form-wrapper input,
+  #contact-form-wrapper textarea {
     padding: 0.8em;
   }
   .contact-info {
@@ -564,13 +568,13 @@ footer p {
   #get-in-touch legend {
     font-weight: 600;
   }
-  #contact-anchor {
+  #contact {
     gap: 8rem;
   }
-  #contact .inputs {
+  #contact-form-wrapper .inputs {
     grid-template-columns: 1fr;
   }
-  #contact form button[type="submit"] {
+  #contact-form-wrapper form button[type="submit"] {
     max-width: 100%;
     margin-right: 0;
   }
