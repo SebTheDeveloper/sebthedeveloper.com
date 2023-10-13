@@ -15,6 +15,8 @@ let projectIndex = 0;
 document.querySelector(".color-fade").onclick = (e) => {
   body.classList.toggle("color-mode-toggle");
   const root = document.querySelector(":root");
+  const h1 = document.querySelector("h1");
+
   // Dark mode
   if (body.classList.contains("color-mode-toggle")) {
     logo.src = "../img/SebDoubleU-icon-dark-mode.png";
@@ -22,6 +24,10 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "var(--white)");
     root.style.setProperty("--gray", "#585858");
     root.style.setProperty("--foreground", "var(--white)");
+    h1.style.setProperty(
+      "--psuedoBackground",
+      "rgba(0, 29, 73, var(--backgroundOpacity, 0))"
+    );
     exitModal.style.color = "var(--white)";
   }
   // Light Mode
@@ -30,8 +36,12 @@ document.querySelector(".color-fade").onclick = (e) => {
     e.target.src = "../img/svg/light-mode.svg";
     root.style.setProperty("--link-text", "#212529");
     root.style.setProperty("--gray", "#8297b7");
-    exitModal.style.color = "var(--red)";
     root.style.setProperty("--foreground", "var(--darkGreyBlue)");
+    h1.style.setProperty(
+      "--psuedoBackground",
+      "rgba(191, 209, 236, var(--backgroundOpacity, 0))"
+    );
+    exitModal.style.color = "var(--red)";
   }
   document
     .querySelector(".btn-outline-secondary")
@@ -317,13 +327,17 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
-function displayOnIntersect(elementNode, tagsToDisplay) {
+function displayOnIntersect(
+  elementNode,
+  tagsToDisplay,
+  displayValue = "block"
+) {
   const observer = new IntersectionObserver((entries, observerInstance) => {
     if (entries[0].isIntersecting) {
       const elements = elementNode.querySelectorAll(tagsToDisplay);
 
       elements.forEach((element) => {
-        element.style.display = "block";
+        element.style.display = displayValue;
       });
 
       observerInstance.unobserve(elementNode);
@@ -333,7 +347,7 @@ function displayOnIntersect(elementNode, tagsToDisplay) {
 }
 
 displayOnIntersect(main.querySelector(".container"), "h2");
-displayOnIntersect(contactFormWrapper, "form *");
+displayOnIntersect(contactFormWrapper, "form > *", "grid");
 displayOnIntersect(footer, "p");
 
 // Form submit
@@ -377,7 +391,6 @@ formElement.addEventListener("submit", async (e) => {
   } catch (error) {
     console.error(`Form Error: ${error}`);
     top.scrollIntoView({ behavior: "smooth" });
-    console.log("now");
 
     const firstMessage = "There was an error submitting the form.";
     const endingMessage = "Please try sending another message.";
