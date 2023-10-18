@@ -425,13 +425,13 @@ async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
   toggleShowList(toggleList, { show: false });
   h1.style.setProperty("--backgroundOpacity", "0");
 
-  await backspaceEffect(h1, 40, 0);
+  await backspaceEffect(h1, 60, 0);
   await delay(500);
   await typeWriterEffect(h1, message, 65);
 
   if (endingMessage !== "") {
     await delay(2000);
-    await backspaceEffect(h1, 50, 0);
+    await backspaceEffect(h1, 60, 0);
     await delay(500);
     await typeWriterEffect(h1, endingMessage, 65);
     await delay(200);
