@@ -1,4 +1,5 @@
 import projectsData from "./data/projectsData.js";
+import chatbot from "./chatbot.js";
 
 const body = document.querySelector("body");
 const loadingCircle = document.querySelector(".loading-circle");
@@ -98,11 +99,11 @@ async function executeTypewriterSequence() {
   const h1 = document.querySelector("h1");
   h1.classList.add("typewriter");
 
-  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 65);
-  await delay(1300);
-  await backspaceEffect(h1, 50, 1);
+  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 50);
+  await delay(1400);
+  await backspaceEffect(h1, 45, 1);
   await delay(500);
-  await typeWriterEffect(h1, "ere are some projects that I've created:", 65);
+  await typeWriterEffect(h1, "ere are some projects that I've created:", 50);
 
   h1.classList.remove("typewriter");
   h1.style.setProperty("--backgroundOpacity", "0.4");
@@ -327,20 +328,25 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
-function displayOnIntersect(elementNode, tagsToDisplay) {
+function setOpacityOnIntersect(elementNode, tagsToDisplay, setDisplay = null) {
   const elementsToObserve = elementNode.querySelectorAll(tagsToDisplay);
 
   const observerCallback = (entries, observerInstance) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
+        if (setDisplay != null) {
+          entry.target.querySelector(".chat-wrapper").style.display =
+            setDisplay;
+        } else {
+          entry.target.style.opacity = "1";
+        }
         observerInstance.unobserve(entry.target);
       }
     });
   };
 
   const observer = new IntersectionObserver(observerCallback, {
-    threshold: 0.1,
+    threshold: setDisplay ? 0.6 : 0,
   });
 
   elementsToObserve.forEach((element) => {
@@ -348,9 +354,10 @@ function displayOnIntersect(elementNode, tagsToDisplay) {
   });
 }
 
-displayOnIntersect(footer, ".container > span");
-displayOnIntersect(footer, "#contact");
-displayOnIntersect(footer, ".contact-info");
+setOpacityOnIntersect(footer, ".container > span");
+setOpacityOnIntersect(footer, "#contact");
+setOpacityOnIntersect(footer, ".contact-info");
+setOpacityOnIntersect(main, "#chat-area", "flex");
 
 // Form submit
 const formElement = contactFormWrapper.querySelector("form");

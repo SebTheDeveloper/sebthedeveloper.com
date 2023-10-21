@@ -279,13 +279,80 @@ footer,
   padding-top: 1rem;
   display: none;
   opacity: 0;
-  padding-bottom: 14rem;
 }
 .main h2 {
   padding: 0 1.5rem 1rem;
   min-width: 300px;
   border-bottom: 1px solid var(--foreground);
   animation: slide-left 0.5s ease-in-out;
+}
+#chat-area {
+  min-height: 100vh;
+  margin-bottom: 3rem;
+}
+.chat-wrapper {
+  --localGrey: rgba(0, 0, 0, 0.6);
+  display: none;
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 1.15em;
+}
+.chat-wrapper h3 {
+  margin-bottom: 2rem !important;
+  animation: fade-in 0.8s ease-in-out;
+}
+.agent {
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+.user {
+  margin-left: auto;
+}
+.user input,
+.user button {
+  border-radius: 8px;
+  padding: 0.4em 0.6em;
+}
+.user input {
+  background-color: var(--localGrey);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+}
+.user button {
+  border: none;
+  background-color: var(--primary-blue);
+  color: var(--white);
+}
+.user input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.agent,
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  overflow-y: hidden;
+  max-width: 80%;
+  letter-spacing: 0.1px;
+}
+.agent > *,
+.user > * {
+  animation: slide-up 1s cubic-bezier(0.2, 1, 0.1, 1);
+}
+.agent img {
+  max-width: 6ch;
+  border-radius: 50%;
+  box-shadow: 0 1px 10px var(--localGrey);
+  opacity: 0.95;
+}
+.agent p,
+.user p {
+  padding: 0.9rem 1.3rem;
+  border-radius: 8px;
+  text-align: left;
+  box-shadow: 0 0 8px var(--localGrey);
+  background-color: var(--localGrey);
 }
 #contact {
   align-items: center;
@@ -457,6 +524,16 @@ footer p {
     opacity: 0;
   }
 }
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 @keyframes slide-down {
   0% {
     transform: translateY(-60px);
@@ -567,6 +644,17 @@ footer p {
   }
   #get-in-touch legend {
     font-weight: 600;
+  }
+  .agent,
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 95%;
+  }
+  .agent p,
+  .user p {
+    padding: 0.8rem 1rem;
   }
   #contact {
     gap: 8rem;
