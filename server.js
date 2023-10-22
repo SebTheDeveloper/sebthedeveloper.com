@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const sendEmail = require("./utils/sendEmail.js");
+const askChatbot = require("./controllers/askChatbot.js");
 require("dotenv").config();
 
 const app = express();
@@ -36,9 +37,14 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "src")));
 
-app.post("/chatbot", (req, res) => {
+app.post("/chatbot", async (req, res) => {
   const questionText = req.body.questionText;
-  res.json({ chatbotResponse: `Your message was received: ${questionText}` });
+  const chatHistory = req.body.chatHistory;
+  // chatHistory === { userTextList: [], agentTextList: [] }
+
+  const chatbotResponse = await askChatbot(questionText, chatHistory);
+
+  res.json({ chatbotResponse });
 });
 
 app.get("/download-resume", (_, res) => {

@@ -32,13 +32,32 @@ function processQuestionForm(e) {
 
   chatWrapper.appendChild(loadingAgent);
 
-  (async function askChatbot() {
+  const chatHistory = {
+    userTextList: [],
+    agentTextList: [],
+  };
+
+  const userTextDomNodes = document.querySelectorAll(".chat-wrapper .user p");
+  const agentTextDomNodes = document.querySelectorAll(".chat-wrapper .agent p");
+
+  userTextDomNodes.forEach((node) => {
+    chatHistory.userTextList.push(
+      node.textContent.trim().replace(/\s{3,}/g, "  ")
+    );
+  });
+  agentTextDomNodes.forEach((node) => {
+    chatHistory.agentTextList.push(
+      node.textContent.trim().replace(/\s{3,}/g, "  ")
+    );
+  });
+
+  async function askChatbot() {
     const response = await fetch("/chatbot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ questionText }),
+      body: JSON.stringify({ questionText, chatHistory }),
     });
     const { chatbotResponse } = await response.json();
 
@@ -65,12 +84,11 @@ function processQuestionForm(e) {
       />
       <button type="submit">Submit</button>
     </form>`;
-    newUserForm
-      .querySelector("form")
-      .addEventListener("submit", processQuestionForm);
 
     chatWrapper.appendChild(newUserForm);
-  })();
+  }
+
+  askChatbot();
 }
 
 function chatbot() {
