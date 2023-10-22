@@ -36,6 +36,11 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "src")));
 
+app.post("/chatbot", (req, res) => {
+  const questionText = req.body.questionText;
+  res.json({ chatbotResponse: `Your message was received: ${questionText}` });
+});
+
 app.get("/download-resume", (_, res) => {
   const filePath = path.join(__dirname, "src", "resume.pdf");
   res.download(filePath, "resume.pdf", (err) => {
