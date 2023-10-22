@@ -359,7 +359,7 @@ setOpacityOnIntersect(footer, "#contact");
 setOpacityOnIntersect(footer, ".contact-info");
 setOpacityOnIntersect(main, "#chat-area", "flex");
 
-// Form submit
+// Contact Form submit
 const formElement = contactFormWrapper.querySelector("form");
 
 formElement.addEventListener("submit", async (e) => {
@@ -469,3 +469,5 @@ function toggleShowList(list, { show }) {
     }
   });
 }
+
+chatbot();

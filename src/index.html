@@ -202,9 +202,7 @@
             <span class="project-underline"></span>
           </div>
           <div id="chat-area">
-            <div
-              class="chat-wrapper flex-column align-items-center justify-content-center"
-            >
+            <div class="chat-wrapper flex-column align-items-center">
               <h3>Chat with Portfolio Assistant</h3>
               <div class="agent">
                 <img
@@ -212,14 +210,24 @@
                   alt="Sebastian's Profile Picture"
                 />
                 <p>
-                  Hi there! 👋 I'm Sebastian's portfolio chat assistant. Ask
-                  me a question about his portfolio or professional
-                  experience and I'll use semantic search to look for answers!
+                  Hi there! 👋 I'm Sebastian's portfolio chat assistant. Ask me
+                  a question about his portfolio or professional experience and
+                  I'll use semantic search to look for answers!
                 </p>
               </div>
               <div class="user">
-                <input type="text" placeholder="ask a question">
-                <button>Submit</button>
+                <form>
+                  <input
+                    required
+                    type="text"
+                    name="question"
+                    placeholder="ask a question"
+                    oninvalid="setCustomValidity('Please enter a question')"
+                    oninput="setCustomValidity('')"
+                    minlength="2"
+                  />
+                  <button type="submit">Submit</button>
+                </form>
               </div>
             </div>
           </div>

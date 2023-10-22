@@ -288,12 +288,13 @@ footer,
 }
 #chat-area {
   min-height: 100vh;
-  margin-bottom: 3rem;
 }
 .chat-wrapper {
   --localGrey: rgba(0, 0, 0, 0.6);
   display: none;
   min-height: 100vh;
+  padding-top: 40vh;
+  padding-bottom: 16rem;
   max-width: 1000px;
   margin: 0 auto;
   font-size: 1.15em;
@@ -304,10 +305,11 @@ footer,
 }
 .agent {
   margin-right: auto;
-  margin-bottom: 1rem;
+  padding-top: 2.5rem;
 }
 .user {
   margin-left: auto;
+  margin-top: 1.5rem;
 }
 .user input,
 .user button {
@@ -315,9 +317,9 @@ footer,
   padding: 0.4em 0.6em;
 }
 .user input {
-  background-color: var(--localGrey);
   border: 1px solid rgba(255, 255, 255, 0.8);
   color: rgba(255, 255, 255, 0.8);
+  outline: none;
 }
 .user button {
   border: none;
@@ -326,6 +328,9 @@ footer,
 }
 .user input::placeholder {
   color: rgba(255, 255, 255, 0.8);
+}
+.user input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 .agent,
 .user {
@@ -337,8 +342,8 @@ footer,
   letter-spacing: 0.1px;
 }
 .agent > *,
-.user > * {
-  animation: slide-up 1s cubic-bezier(0.2, 1, 0.1, 1);
+.user > form {
+  animation: slide-up 1.2s cubic-bezier(0.2, 1, 0.1, 1);
 }
 .agent img {
   max-width: 6ch;
@@ -352,8 +357,42 @@ footer,
   border-radius: 8px;
   text-align: left;
   box-shadow: 0 0 8px var(--localGrey);
+}
+.agent p,
+.user p,
+.user input {
   background-color: var(--localGrey);
 }
+
+.loading span {
+  display: inline-block;
+  opacity: 0;
+  font-size: 2em;
+  animation: dotPulse 1.5s infinite;
+}
+
+.loading span:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.loading span:nth-child(2) {
+  animation-delay: 1s;
+}
+.loading span:nth-child(3) {
+  animation-delay: 1.5s;
+}
+
+@keyframes dotPulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 #contact {
   align-items: center;
   justify-content: space-between;
@@ -645,6 +684,9 @@ footer p {
   #get-in-touch legend {
     font-weight: 600;
   }
+  .chat-wrapper h3 {
+    margin-bottom: 0 !important;
+  }
   .agent,
   .user {
     display: flex;
@@ -703,5 +745,15 @@ footer p {
   }
   .project-card-bottom {
     padding: 1rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .user {
+    gap: 0.4rem;
+  }
+  .user input,
+  .user button {
+    font-size: 0.85em;
   }
 }
