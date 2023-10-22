@@ -293,8 +293,7 @@ footer,
   --localGrey: rgba(0, 0, 0, 0.6);
   display: none;
   min-height: 100vh;
-  padding-top: 40vh;
-  padding-bottom: 16rem;
+  padding: 40vh 0;
   max-width: 1000px;
   margin: 0 auto;
   font-size: 1.15em;
@@ -310,6 +309,10 @@ footer,
 .user {
   margin-left: auto;
   margin-top: 1.5rem;
+}
+.user > form {
+  opacity: 0;
+  animation: fade-in 0.6s 0.4s ease-in-out forwards;
 }
 .user input,
 .user button {
@@ -341,8 +344,7 @@ footer,
   max-width: 80%;
   letter-spacing: 0.1px;
 }
-.agent > *,
-.user > form {
+.agent > * {
   animation: slide-up 1.2s cubic-bezier(0.2, 1, 0.1, 1);
 }
 .agent img {
