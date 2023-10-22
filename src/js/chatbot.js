@@ -15,6 +15,28 @@ function processQuestionForm(e) {
     ".user:last-of-type"
   ).innerHTML = `<p>${questionText}</p>`;
 
+  const chatHistory = {
+    userTextList: [],
+    agentTextList: [],
+  };
+
+  const userTextDomNodes = document.querySelectorAll(".chat-wrapper .user p");
+  const agentTextDomNodes = document.querySelectorAll(".chat-wrapper .agent p");
+
+  const NODE_LIMIT = 4;
+  let limitHistoryLength = userTextDomNodes.length >= NODE_LIMIT + 1;
+
+  function processMessages(nodeList, targetList, limitLength) {
+    const startIndex = limitHistoryLength ? nodeList.length - limitLength : 0;
+
+    for (let i = startIndex; i < nodeList.length; i++) {
+      targetList.push(nodeList[i].textContent.trim().replace(/\s{3,}/g, "  "));
+    }
+  }
+
+  processMessages(userTextDomNodes, chatHistory.userTextList, NODE_LIMIT);
+  processMessages(agentTextDomNodes, chatHistory.agentTextList, NODE_LIMIT - 1);
+
   const loadingAgent = document.createElement("div");
   loadingAgent.classList.add("agent");
   loadingAgent.innerHTML = `
@@ -32,26 +54,7 @@ function processQuestionForm(e) {
 
   chatWrapper.appendChild(loadingAgent);
 
-  const chatHistory = {
-    userTextList: [],
-    agentTextList: [],
-  };
-
-  const userTextDomNodes = document.querySelectorAll(".chat-wrapper .user p");
-  const agentTextDomNodes = document.querySelectorAll(".chat-wrapper .agent p");
-
-  userTextDomNodes.forEach((node) => {
-    chatHistory.userTextList.push(
-      node.textContent.trim().replace(/\s{3,}/g, "  ")
-    );
-  });
-  agentTextDomNodes.forEach((node) => {
-    chatHistory.agentTextList.push(
-      node.textContent.trim().replace(/\s{3,}/g, "  ")
-    );
-  });
-
-  async function askChatbot() {
+  (async function askChatbot() {
     const response = await fetch("/chatbot", {
       method: "POST",
       headers: {
@@ -61,13 +64,15 @@ function processQuestionForm(e) {
     });
     const { chatbotResponse } = await response.json();
 
+    const parsedChatbotResponse = replaceATagTarget(chatbotResponse);
+
     loadingAgent.innerHTML = `
     <img
       src="img/profile-picture.jpg"
       alt="Sebastian's Profile Picture"
     />
     <p style="fade-in 0.3s ease-in-out">
-      ${chatbotResponse}
+      ${parsedChatbotResponse}
     </p>`;
 
     const newUserForm = document.createElement("div");
@@ -86,9 +91,16 @@ function processQuestionForm(e) {
     </form>`;
 
     chatWrapper.appendChild(newUserForm);
-  }
+  })();
+}
 
-  askChatbot();
+function replaceATagTarget(inputString) {
+  return inputString.replace(/<a href=["'](http[^"']+)["']/g, (match, href) => {
+    if (match.includes("target=")) {
+      return match;
+    }
+    return `<a href="${href}" target="_blank"`;
+  });
 }
 
 function chatbot() {

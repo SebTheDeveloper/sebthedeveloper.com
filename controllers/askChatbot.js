@@ -4,9 +4,9 @@ const openaiRequest = require("../utils/openaiRequest.js");
 const { performance } = require("perf_hooks");
 require("dotenv").config();
 
-async function askChatbot(questionText, chatHistory) {
-  let startTime = performance.now();
+const snippets = require("../data/portfolio_snippets/snippets.js");
 
+async function askChatbot(questionText, chatHistory) {
   const messages = [];
   const initialPrompt = agentPrompt();
   let totalTokenCount = countGptTokens(initialPrompt);
@@ -16,25 +16,53 @@ async function askChatbot(questionText, chatHistory) {
     content: initialPrompt,
   });
 
-  const userText = chatHistory.userTextList;
   const agentText = chatHistory.agentTextList;
+  const userText = chatHistory.userTextList;
+
   if (userText.length > 0) {
     for (let i = 0; i < userText.length; i++) {
-      messages.push({
-        role: "assistant",
-        content: agentText[i],
-      });
-      totalTokenCount += countGptTokens(agentText[i]);
+      if (agentText.length < userText.length) {
+        if (agentText[i]) {
+          messages.push({
+            role: "user",
+            content: userText[i],
+          });
+          totalTokenCount += countGptTokens(userText[i]);
 
-      messages.push({
-        role: "user",
-        content: userText[i],
-      });
-      totalTokenCount += countGptTokens(userText[i]);
+          messages.push({
+            role: "assistant",
+            content: agentText[i],
+          });
+          totalTokenCount += countGptTokens(agentText[i]);
+        } else {
+          messages.push({
+            role: "user",
+            content: userText[i],
+          });
+          totalTokenCount += countGptTokens(userText[i]);
+        }
+      } else {
+        messages.push({
+          role: "assistant",
+          content: agentText[i],
+        });
+        totalTokenCount += countGptTokens(agentText[i]);
+
+        messages.push({
+          role: "user",
+          content: userText[i],
+        });
+        totalTokenCount += countGptTokens(userText[i]);
+      }
     }
   }
 
-  const relevantData = `There is none at the moment.`;
+  let relevantData = "";
+  snippets.forEach((snippet, index) => {
+    if (index <= 1) {
+      relevantData += snippet + "\n";
+    }
+  });
   const relevantDataMessage = `[Collected Relevant Data]: ${relevantData}`;
 
   messages.push({
@@ -43,15 +71,16 @@ async function askChatbot(questionText, chatHistory) {
   });
   totalTokenCount += countGptTokens(relevantDataMessage);
 
-  console.log(`INPUT TOKEN COUNT: ${totalTokenCount}`);
+  let startTime = performance.now();
 
-  console.log(`MESSAGES: ${JSON.stringify(messages)}`);
+  console.log("MESSAGES:", JSON.stringify(messages));
 
   const completion = await openaiRequest({
-    model: "gpt-4",
+    model: "gpt-3.5-turbo",
     messages,
   });
-  console.log(`output token count: ${countGptTokens(completion)}`);
+  console.log(`INPUT TOKEN COUNT: ${totalTokenCount}`);
+  console.log(`OUTPUT TOKEN COUNT: ${countGptTokens(completion)}`);
 
   let endTime = performance.now();
   let timeTaken = endTime - startTime;

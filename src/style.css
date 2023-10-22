@@ -365,6 +365,9 @@ footer,
 .user input {
   background-color: var(--localGrey);
 }
+.agent a {
+  text-decoration: none !important;
+}
 
 .loading span {
   display: inline-block;
