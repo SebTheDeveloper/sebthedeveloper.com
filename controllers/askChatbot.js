@@ -1,10 +1,9 @@
 const agentPrompt = require("../data/prompts/agentPrompt.js");
 const countGptTokens = require("../utils/countGptTokens.js");
-const openaiRequest = require("../utils/openaiRequest.js");
+const openaiChatRequest = require("../utils/openaiChatRequest.js");
 const { performance } = require("perf_hooks");
+const semanticSearch = require("../utils/semanticSearch.js");
 require("dotenv").config();
-
-const snippets = require("../data/portfolio_snippets/snippets.js");
 
 async function askChatbot(questionText, chatHistory) {
   const messages = [];
@@ -58,11 +57,11 @@ async function askChatbot(questionText, chatHistory) {
   }
 
   let relevantData = "";
-  snippets.forEach((snippet, index) => {
-    if (index <= 1) {
-      relevantData += snippet + "\n";
-    }
+  const searchResultsArr = await semanticSearch(questionText, 2);
+  searchResultsArr.forEach((result) => {
+    relevantData += result.content + "\n";
   });
+
   const relevantDataMessage = `[Collected Relevant Data]: ${relevantData}`;
 
   messages.push({
@@ -73,10 +72,8 @@ async function askChatbot(questionText, chatHistory) {
 
   let startTime = performance.now();
 
-  console.log("MESSAGES:", JSON.stringify(messages));
-
-  const completion = await openaiRequest({
-    model: "gpt-3.5-turbo",
+  const completion = await openaiChatRequest({
+    model: "gpt-4",
     messages,
   });
   console.log(`INPUT TOKEN COUNT: ${totalTokenCount}`);

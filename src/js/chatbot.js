@@ -23,7 +23,7 @@ function processQuestionForm(e) {
   const userTextDomNodes = document.querySelectorAll(".chat-wrapper .user p");
   const agentTextDomNodes = document.querySelectorAll(".chat-wrapper .agent p");
 
-  const NODE_LIMIT = 4;
+  const NODE_LIMIT = 5;
   let limitHistoryLength = userTextDomNodes.length >= NODE_LIMIT + 1;
 
   function processMessages(nodeList, targetList, limitLength) {
@@ -95,12 +95,15 @@ function processQuestionForm(e) {
 }
 
 function replaceATagTarget(inputString) {
-  return inputString.replace(/<a href=["'](http[^"']+)["']/g, (match, href) => {
-    if (match.includes("target=")) {
-      return match;
+  return inputString.replace(
+    /<a href=["'](https?:\/\/(www\.)?[^"']+)["']/g,
+    (match, href) => {
+      if (match.includes("target=")) {
+        return match;
+      }
+      return `<a href="${href}" target="_blank"`;
     }
-    return `<a href="${href}" target="_blank"`;
-  });
+  );
 }
 
 function chatbot() {

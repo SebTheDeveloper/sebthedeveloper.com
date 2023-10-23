@@ -1,10 +1,10 @@
-async function openaiRequest(options) {
+async function openaiChatRequest(options) {
   try {
     const result = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify(options),
     });
@@ -16,4 +16,4 @@ async function openaiRequest(options) {
   }
 }
 
-module.exports = openaiRequest;
+module.exports = openaiChatRequest;
