@@ -17,6 +17,7 @@ document.querySelector(".color-fade").onclick = (e) => {
   body.classList.toggle("color-mode-toggle");
   const root = document.querySelector(":root");
   const h1 = document.querySelector("h1");
+  const chatWrapper = document.querySelector(".chat-wrapper");
 
   // Dark mode
   if (body.classList.contains("color-mode-toggle")) {
@@ -25,6 +26,7 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "var(--white)");
     root.style.setProperty("--gray", "#585858");
     root.style.setProperty("--foreground", "var(--white)");
+    chatWrapper.style.setProperty("--chatBackground", "var(--localGrey)");
     h1.style.setProperty(
       "--psuedoBackground",
       "rgba(0, 29, 73, var(--backgroundOpacity, 0))"
@@ -38,6 +40,7 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "#212529");
     root.style.setProperty("--gray", "#8297b7");
     root.style.setProperty("--foreground", "var(--darkGreyBlue)");
+    chatWrapper.style.setProperty("--chatBackground", "rgb(15,15,15)");
     h1.style.setProperty(
       "--psuedoBackground",
       "rgba(191, 209, 236, var(--backgroundOpacity, 0))"
@@ -100,7 +103,7 @@ async function executeTypewriterSequence() {
   h1.classList.add("typewriter");
 
   await typeWriterEffect(h1, "Hi, my name is Sebastian.", 50);
-  await delay(1400);
+  await delay(1350);
   await backspaceEffect(h1, 45, 1);
   await delay(500);
   await typeWriterEffect(h1, "ere are some projects that I've created:", 50);
@@ -328,25 +331,20 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
-function setOpacityOnIntersect(elementNode, tagsToDisplay, setDisplay = null) {
+function setOpacityOnIntersect(elementNode, tagsToDisplay) {
   const elementsToObserve = elementNode.querySelectorAll(tagsToDisplay);
 
   const observerCallback = (entries, observerInstance) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (setDisplay != null) {
-          entry.target.querySelector(".chat-wrapper").style.display =
-            setDisplay;
-        } else {
-          entry.target.style.opacity = "1";
-        }
+        entry.target.style.opacity = "1";
         observerInstance.unobserve(entry.target);
       }
     });
   };
 
   const observer = new IntersectionObserver(observerCallback, {
-    threshold: setDisplay ? 0.6 : 0,
+    threshold: 0,
   });
 
   elementsToObserve.forEach((element) => {
@@ -357,7 +355,26 @@ function setOpacityOnIntersect(elementNode, tagsToDisplay, setDisplay = null) {
 setOpacityOnIntersect(footer, ".container > span");
 setOpacityOnIntersect(footer, "#contact");
 setOpacityOnIntersect(footer, ".contact-info");
-setOpacityOnIntersect(main, "#chat-area", "flex");
+
+const observerCallback = (entries, observerInstance) => {
+  if (entries[0].isIntersecting) {
+    entries[0].target.querySelector(".chat-wrapper").style.display = "flex";
+    observerInstance.unobserve(entries[0].target);
+
+    const remToPx = parseFloat(
+      getComputedStyle(document.documentElement).fontSize
+    );
+    const topOfH3 = document.querySelector(".chat-wrapper h3").offsetTop;
+    const adjustedPosition = topOfH3 - 16 * remToPx;
+
+    window.scrollTo({
+      top: adjustedPosition,
+      behavior: "smooth",
+    });
+  }
+};
+const observer = new IntersectionObserver(observerCallback, { threshold: 0.5 });
+observer.observe(document.getElementById("chat-area"));
 
 // Contact Form submit
 const formElement = contactFormWrapper.querySelector("form");

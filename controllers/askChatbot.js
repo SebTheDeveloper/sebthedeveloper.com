@@ -76,12 +76,14 @@ async function askChatbot(questionText, chatHistory) {
     model: "gpt-4",
     messages,
   });
-  console.log(`INPUT TOKEN COUNT: ${totalTokenCount}`);
-  console.log(`OUTPUT TOKEN COUNT: ${countGptTokens(completion)}`);
 
   let endTime = performance.now();
   let timeTaken = endTime - startTime;
-  console.log(`Time taken for the API request: ${timeTaken} milliseconds.`);
+
+  console.log(`INPUT TOKEN COUNT: ${totalTokenCount}
+  OUTPUT TOKEN COUNT: ${countGptTokens(completion)}
+  CHAT REQUEST COMPLETED AT: ${new Date().toLocaleString()}
+  TIME TAKEN FOR COMPLETION: ${timeTaken} MILLISECONDS.`);
 
   return completion;
 }

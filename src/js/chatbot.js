@@ -56,13 +56,7 @@ function processQuestionForm(e) {
 
   setTimeout(() => {
     if (isElementBottomBelowViewport(loadingAgent)) {
-      const agents = document.querySelectorAll(".agent");
-      if (agents && agents.length > 1) {
-        const targetAgent = agents[agents.length - 2];
-        if (targetAgent) {
-          scrollToTopOfElement(targetAgent);
-        }
-      }
+      scrollToLoadingElement(loadingAgent);
     }
   }, 0);
 
@@ -106,7 +100,6 @@ function processQuestionForm(e) {
 
     setTimeout(() => {
       if (isElementBottomBelowViewport(newUserForm)) {
-        console.log("The bottom of the element is below the viewport!");
         const agents = document.querySelectorAll(".agent");
         if (agents && agents.length > 1) {
           const targetAgent = agents[agents.length - 2];
@@ -134,11 +127,12 @@ function scrollToBottomOfElement(element) {
   });
 }
 
-function scrollToTopOfElement(element) {
-  const topOfElement = element.offsetTop;
+function scrollToLoadingElement(element) {
+  const bottomOfElement = element.offsetTop + element.offsetHeight;
+  const viewportHeight = window.innerHeight;
 
   window.scrollTo({
-    top: topOfElement,
+    top: bottomOfElement - viewportHeight,
     behavior: "smooth",
   });
 }

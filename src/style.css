@@ -291,6 +291,8 @@ footer,
 }
 .chat-wrapper {
   --localGrey: rgba(0, 0, 0, 0.6);
+  --chatForeground: var(--white);
+  --chatBackground: var(--localGrey);
   display: none;
   min-height: 100vh;
   padding: 35vh 0 50vh;
@@ -367,7 +369,8 @@ footer,
 .agent p,
 .user p,
 .user input {
-  background-color: var(--localGrey);
+  color: var(--chatForeground);
+  background-color: var(--chatBackground);
 }
 .agent a {
   text-decoration: none !important;
@@ -756,10 +759,14 @@ footer p {
     padding: 1rem 1.5rem;
   }
   .agent img {
-    max-width: 20%;
+    max-width: 16%;
   }
   .agent p {
     letter-spacing: 0px;
+  }
+  .agent p,
+  .user p {
+    font-size: 0.94em;
   }
 }
 
