@@ -293,7 +293,7 @@ footer,
   --localGrey: rgba(0, 0, 0, 0.6);
   display: none;
   min-height: 100vh;
-  padding: 40vh 0;
+  padding: 35vh 0 50vh;
   max-width: 1000px;
   margin: 0 auto;
   font-size: 1.15em;
@@ -320,6 +320,7 @@ footer,
   padding: 0.4em 0.6em;
 }
 .user input {
+  max-width: 60%;
   border: 1px solid rgba(255, 255, 255, 0.8);
   color: rgba(255, 255, 255, 0.8);
   outline: none;
@@ -352,6 +353,9 @@ footer,
   border-radius: 50%;
   box-shadow: 0 1px 10px var(--localGrey);
   opacity: 0.95;
+}
+.agent a {
+  word-break: break-all;
 }
 .agent p,
 .user p {
@@ -750,6 +754,12 @@ footer p {
   }
   .project-card-bottom {
     padding: 1rem 1.5rem;
+  }
+  .agent img {
+    max-width: 20%;
+  }
+  .agent p {
+    letter-spacing: 0px;
   }
 }
 

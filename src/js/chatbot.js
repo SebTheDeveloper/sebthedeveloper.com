@@ -54,6 +54,18 @@ function processQuestionForm(e) {
 
   chatWrapper.appendChild(loadingAgent);
 
+  setTimeout(() => {
+    if (isElementBottomBelowViewport(loadingAgent)) {
+      const agents = document.querySelectorAll(".agent");
+      if (agents && agents.length > 1) {
+        const targetAgent = agents[agents.length - 2];
+        if (targetAgent) {
+          scrollToTopOfElement(targetAgent);
+        }
+      }
+    }
+  }, 0);
+
   (async function askChatbot() {
     const response = await fetch("/chatbot", {
       method: "POST",
@@ -91,7 +103,44 @@ function processQuestionForm(e) {
     </form>`;
 
     chatWrapper.appendChild(newUserForm);
+
+    setTimeout(() => {
+      if (isElementBottomBelowViewport(newUserForm)) {
+        console.log("The bottom of the element is below the viewport!");
+        const agents = document.querySelectorAll(".agent");
+        if (agents && agents.length > 1) {
+          const targetAgent = agents[agents.length - 2];
+          if (targetAgent) {
+            scrollToBottomOfElement(targetAgent);
+          }
+        }
+      }
+    }, 0);
   })();
+}
+
+function isElementBottomBelowViewport(el) {
+  const rect = el.getBoundingClientRect();
+
+  return rect.bottom > window.innerHeight;
+}
+
+function scrollToBottomOfElement(element) {
+  const bottomOfElement = element.offsetTop + element.offsetHeight;
+
+  window.scrollTo({
+    top: bottomOfElement,
+    behavior: "smooth",
+  });
+}
+
+function scrollToTopOfElement(element) {
+  const topOfElement = element.offsetTop;
+
+  window.scrollTo({
+    top: topOfElement,
+    behavior: "smooth",
+  });
 }
 
 function replaceATagTarget(inputString) {
