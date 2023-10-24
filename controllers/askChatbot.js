@@ -57,12 +57,13 @@ async function askChatbot(questionText, chatHistory) {
   }
 
   let relevantData = "";
-  const searchResultsArr = await semanticSearch(questionText, 2);
+  const searchResultsArr = await semanticSearch(questionText, 3);
   searchResultsArr.forEach((result) => {
     relevantData += result.content + "\n";
   });
 
-  const relevantDataMessage = `[Collected Relevant Data]: ${relevantData}`;
+  const relevantDataMessage = `[Collected Relevant Data]: ${relevantData}
+  (Reminder: Again, please keep your answers as short as reasonably possible given the context. Ideally responses should be between 1-2 sentences)`;
 
   messages.push({
     role: "user",

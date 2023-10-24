@@ -315,17 +315,27 @@ function onNextClick(event) {
 function onTransitionEnd() {
   hideMain();
 
-  window.removeEventListener("wheel", preventDefault, { passive: false });
-  window.removeEventListener("touchmove", preventDefault, { passive: false });
+  setPreventTouchAndScroll(false);
   main.removeEventListener("transitionend", onTransitionEnd);
 }
 
-function afterScroll() {
-  if (window.scrollY === 0) {
-    window.removeEventListener("scroll", afterScroll);
-    main.addEventListener("transitionend", onTransitionEnd);
-  }
+const listenersMap = new Map();
+
+function afterScroll(yPosition, callback) {
+  const listener = (e) => {
+    if (window.scrollY === yPosition) {
+      window.removeEventListener("scroll", listenersMap.get(callback));
+      listenersMap.delete(callback);
+      callback();
+    }
+  };
+  listenersMap.set(callback, listener);
+  return listener;
 }
+
+const loadMainAfterTransition = afterScroll(0, () => {
+  main.addEventListener("transitionend", onTransitionEnd);
+});
 
 function preventDefault(e) {
   e.preventDefault();
@@ -376,6 +386,18 @@ const observerCallback = (entries, observerInstance) => {
 const observer = new IntersectionObserver(observerCallback, { threshold: 0.5 });
 observer.observe(document.getElementById("chat-area"));
 
+function setPreventTouchAndScroll(isActive = false) {
+  if (isActive) {
+    window.addEventListener("wheel", preventDefault, { passive: false });
+    window.addEventListener("touchstart", preventDefault, { passive: false });
+  } else {
+    window.removeEventListener("wheel", preventDefault, { passive: false });
+    window.removeEventListener("touchstart", preventDefault, {
+      passive: false,
+    });
+  }
+}
+
 // Contact Form submit
 const formElement = contactFormWrapper.querySelector("form");
 
@@ -387,8 +409,7 @@ formElement.addEventListener("submit", async (e) => {
 
   const top = document.getElementById("top");
 
-  window.addEventListener("wheel", preventDefault, { passive: false });
-  window.addEventListener("touchmove", preventDefault, { passive: false });
+  setPreventTouchAndScroll(true);
   loadingCircle.style.display = "flex";
 
   try {
@@ -409,7 +430,7 @@ formElement.addEventListener("submit", async (e) => {
 
     top.scrollIntoView({ behavior: "smooth" });
     loadingCircle.style.display = "none";
-    window.addEventListener("scroll", afterScroll);
+    window.addEventListener("scroll", loadMainAfterTransition);
 
     const firstMessage = `Thanks for reaching out, ${data.name}.`;
     const endingMessage = "I look forward to speaking with you soon.";

@@ -1,3 +1,5 @@
+const remToPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
 function processQuestionForm(e) {
   e.preventDefault();
 
@@ -24,7 +26,7 @@ function processQuestionForm(e) {
   const agentTextDomNodes = document.querySelectorAll(".chat-wrapper .agent p");
 
   const NODE_LIMIT = 5;
-  let limitHistoryLength = userTextDomNodes.length >= NODE_LIMIT + 1;
+  let limitHistoryLength = userTextDomNodes.length >= NODE_LIMIT;
 
   function processMessages(nodeList, targetList, limitLength) {
     const startIndex = limitHistoryLength ? nodeList.length - limitLength : 0;
@@ -55,7 +57,7 @@ function processQuestionForm(e) {
   chatWrapper.appendChild(loadingAgent);
 
   setTimeout(() => {
-    if (isElementBottomBelowViewport(loadingAgent)) {
+    if (isElementBottomBelowViewport(loadingAgent, 16 * remToPx)) {
       scrollToLoadingElement(loadingAgent);
     }
   }, 0);
@@ -99,7 +101,7 @@ function processQuestionForm(e) {
     chatWrapper.appendChild(newUserForm);
 
     setTimeout(() => {
-      if (isElementBottomBelowViewport(newUserForm)) {
+      if (isElementBottomBelowViewport(newUserForm, 3 * remToPx)) {
         const agents = document.querySelectorAll(".agent");
         if (agents && agents.length > 1) {
           const targetAgent = agents[agents.length - 2];
@@ -112,10 +114,10 @@ function processQuestionForm(e) {
   })();
 }
 
-function isElementBottomBelowViewport(el) {
+function isElementBottomBelowViewport(el, addDistance = 0) {
   const rect = el.getBoundingClientRect();
 
-  return rect.bottom > window.innerHeight;
+  return rect.bottom + addDistance > window.innerHeight;
 }
 
 function scrollToBottomOfElement(element) {
@@ -132,7 +134,7 @@ function scrollToLoadingElement(element) {
   const viewportHeight = window.innerHeight;
 
   window.scrollTo({
-    top: bottomOfElement - viewportHeight,
+    top: bottomOfElement - viewportHeight + 16 * remToPx,
     behavior: "smooth",
   });
 }

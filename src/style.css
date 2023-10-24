@@ -300,6 +300,9 @@ footer,
   margin: 0 auto;
   font-size: 1.15em;
 }
+.chat-wrapper p {
+  margin-bottom: 0;
+}
 .chat-wrapper h3 {
   margin-bottom: 2rem !important;
   animation: fade-in 0.8s ease-in-out;
