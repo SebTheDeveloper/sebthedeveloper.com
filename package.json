@@ -4,7 +4,8 @@
   "description": "SebTheDeveloper.com - Web Developer Portfolio",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "uploadSnippets": "node controllers/processNewData.js"
   },
   "keywords": [],
   "author": "",
