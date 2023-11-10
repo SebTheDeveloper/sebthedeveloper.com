@@ -74,7 +74,7 @@ async function askChatbot(questionText, chatHistory) {
   let startTime = performance.now();
 
   const completion = await openaiChatRequest({
-    model: "gpt-4",
+    model: "gpt-4-1106-preview",
     messages,
   });
 
