@@ -295,7 +295,7 @@ footer,
   --chatBackground: var(--localGrey);
   display: none;
   min-height: 100vh;
-  padding: 35vh 0 50vh;
+  padding: 35vh 0 45vh;
   max-width: 1000px;
   margin: 0 auto;
   font-size: 1.15em;

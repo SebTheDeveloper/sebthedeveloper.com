@@ -8,6 +8,8 @@ async function processNewData(text) {
       `INSERT INTO documents (content, embedding) VALUES ($1, $2) RETURNING *`,
       [newEmbedding.text, `[${newEmbedding.embedding}]`]
     );
+
+    console.log("Snippets successfully uploaded to database.");
     return insertedEmbeddings;
   } catch (err) {
     console.error(err.stack);

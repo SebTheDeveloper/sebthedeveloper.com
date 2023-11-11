@@ -61,6 +61,14 @@ app.get("/download-resume", (_, res) => {
 });
 
 app.post("/get-in-touch", async (req, res) => {
+  /* Will activate spam rejection upon further testing
+  
+   if (req.body.phone) {
+       // The honeypot field is filled, likely by a bot
+       return res.status(400).send('Spam detected!');
+   }
+  */
+
   const name = req.body.name;
   const email = req.body.email;
   const message = req.body.message;
@@ -70,7 +78,9 @@ app.post("/get-in-touch", async (req, res) => {
       await sendEmail({
         from: "Portfolio Site *Contact Form Submission*",
         to: "contact@sebthedeveloper.com",
-        subject: "Portfolio Site *Contact Form Submission*",
+        subject: `${
+          req.body.phone ? "Spam Likely | " : ""
+        }Portfolio Site *Contact Form Submission*`,
         html: `
           <h1 style="font-family: 'Arial';font-size:18px;">New contact form from ${name},</h1>
           <p style="font-family: 'Arial';font-size:18px;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a>
