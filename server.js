@@ -16,7 +16,7 @@ const ONE_DAY_IN_MILLISECONDS = 86400000;
 app.use(
   "/img",
   express.static(path.join(__dirname, "src", "img"), {
-    maxAge: ONE_DAY_IN_MILLISECONDS,
+    maxAge: ONE_DAY_IN_MILLISECONDS * 7,
   })
 );
 app.use(
