@@ -2,6 +2,7 @@ const agentPrompt = require("../data/prompts/agentPrompt.js");
 const countGptTokens = require("../utils/countGptTokens.js");
 const openaiChatRequest = require("../utils/openaiChatRequest.js");
 const { performance } = require("perf_hooks");
+const saveChatMessages = require("../utils/saveChatMessages.js");
 const semanticSearch = require("../utils/semanticSearch.js");
 require("dotenv").config();
 
@@ -85,6 +86,8 @@ async function askChatbot(questionText, chatHistory) {
   OUTPUT TOKEN COUNT: ${countGptTokens(completion)}
   CHAT REQUEST COMPLETED AT: ${new Date().toLocaleString()}
   TIME TAKEN FOR COMPLETION: ${timeTaken} MILLISECONDS.`);
+
+  await saveChatMessages({ userText, agentText: [...agentText, completion] });
 
   return completion;
 }
