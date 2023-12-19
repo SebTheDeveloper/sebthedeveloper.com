@@ -561,6 +561,13 @@ footer {
 footer p {
   margin: 0;
 }
+footer .lead a {
+  text-decoration: none;
+  color: inherit;
+}
+footer .lead a:hover {
+  text-shadow: 0 0 4px var(--white);
+}
 @keyframes fade-in {
   0% {
     opacity: 0;

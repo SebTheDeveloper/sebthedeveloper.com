@@ -56,15 +56,6 @@ function processQuestionForm(e) {
 
   chatWrapper.appendChild(loadingAgent);
 
-  // <div class="user">
-  //   <div style="background-color: rgb(128 128 128 / 31%);border-radius: 4px;padding: 0.5rem;font-size: 0.85em;">
-  //     Best Model (GPT-4)
-  //   </div>
-  //   <div style="background-color: rgb(128 128 128 / 31%);border-radius: 4px;padding: 0.5rem;font-size: 0.85em;">
-  //     Faster Model (GPT-3.5)
-  //   </div>
-  // </div>;
-
   setTimeout(() => {
     if (isElementBottomBelowViewport(loadingAgent, 16 * remToPx)) {
       scrollToLoadingElement(loadingAgent);

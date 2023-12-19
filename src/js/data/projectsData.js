@@ -5,7 +5,7 @@ const projectsData = [
     projectType: "Personal Project",
     tech: "React, MongoDB, Node.js, Express, Node Cron, React Markdown, GPT-4/GPT-3.5 Integration, Cheerio, JavaScript, HTML, CSS",
     liveProjectLink: "https://WebXpert.io",
-    githubLink: "https://github.com/sebdoubleu/ai-news-scraper",
+    githubLink: "https://github.com/sebthedeveloper/ai-news-scraper",
     videoUrl: "",
     features: [
       "Scrapes and summarizes news articles from techcrunch.com daily.",
@@ -22,7 +22,7 @@ const projectsData = [
     projectType: "Commissioned Work",
     tech: "TypeScript, React, Vite, Stripe Integration, Bootstrap, Express, Node.js, CSS",
     liveProjectLink: "https://PalmBeachCustomGrillz.com",
-    githubLink: "https://github.com/sebdoubleu/ecommerce-grills-shop",
+    githubLink: "https://github.com/sebthedeveloper/ecommerce-grills-shop",
     videoUrl: "",
     features: [
       "Browse available products and add items to cart.",
@@ -38,7 +38,7 @@ const projectsData = [
     projectType: "Commissioned Work",
     tech: "Vanilla JavaScript, MongoDB, Node.js, NodeMailer, Express, Express Basic Auth, HTML, CSS",
     liveProjectLink: "https://EzerFarmTN.com",
-    githubLink: "https://github.com/sebdoubleu/ezerfarmtn.com",
+    githubLink: "https://github.com/sebthedeveloper/ezerfarmtn.com",
     demoAccount: {
       user: "example-user",
       password: "example-password",
@@ -60,7 +60,7 @@ const projectsData = [
     projectType: "Commissioned Work",
     tech: "JavaScript, Node.js, Express, Handlebars, Passport, BCrypt, Express Session, Express Flash, Nodemailer, HTML, CSS",
     liveProjectLink: "https://goodnoodle.xyz",
-    githubLink: "https://github.com/sebdoubleu/email-templating-demo",
+    githubLink: "https://github.com/sebthedeveloper/email-templating-demo",
     demoAccount: {
       user: "example-user",
       password: "example-password",
@@ -81,7 +81,7 @@ const projectsData = [
     projectType: "Personal Project",
     tech: "Vanilla JavaScript, WebPack, HTML, CSS",
     liveProjectLink: "/demos/apocalypse-mega-mart",
-    githubLink: "https://github.com/sebdoubleu/apocalypse-ecommerce",
+    githubLink: "https://github.com/sebthedeveloper/apocalypse-ecommerce",
     videoUrl: "",
     features: [
       "View survival statistics of each item.",
@@ -100,18 +100,19 @@ const projectsData = [
         name: "Brothers Moving and Storage",
         href: "/demos/brothers-moving-and-storage",
         github:
-          "https://github.com/sebdoubleu/brothers-moving-and-storage-landing-page/",
+          "https://github.com/sebthedeveloper/brothers-moving-and-storage-landing-page/",
       },
       {
         name: "Off-Load Moving",
         href: "/demos/off-load-moving",
-        github: "https://github.com/sebdoubleu/off-load-moving-landing-page",
+        github:
+          "https://github.com/sebthedeveloper/off-load-moving-landing-page",
       },
       {
         name: "Cross Country Movers",
         href: "/demos/cross-country-movers",
         github:
-          "https://github.com/sebdoubleu/cross-country-movers-landing-page",
+          "https://github.com/sebthedeveloper/cross-country-movers-landing-page",
       },
     ],
     githubLink: null,

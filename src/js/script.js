@@ -366,25 +366,16 @@ setOpacityOnIntersect(footer, ".container > span");
 setOpacityOnIntersect(footer, "#contact");
 setOpacityOnIntersect(footer, ".contact-info");
 
-const observerCallback = (entries, observerInstance) => {
+const chatObserverCallback = (entries, observerInstance) => {
   if (entries[0].isIntersecting) {
     entries[0].target.querySelector(".chat-wrapper").style.display = "flex";
     observerInstance.unobserve(entries[0].target);
-
-    const remToPx = parseFloat(
-      getComputedStyle(document.documentElement).fontSize
-    );
-    const topOfH3 = document.querySelector(".chat-wrapper h3").offsetTop;
-    const adjustedPosition = topOfH3 - 16 * remToPx;
-
-    window.scrollTo({
-      top: adjustedPosition,
-      behavior: "smooth",
-    });
   }
 };
-const observer = new IntersectionObserver(observerCallback, { threshold: 0.5 });
-observer.observe(document.getElementById("chat-area"));
+const chatObserver = new IntersectionObserver(chatObserverCallback, {
+  threshold: 0.5,
+});
+chatObserver.observe(document.getElementById("chat-area"));
 
 function setPreventTouchAndScroll(isActive = false) {
   if (isActive) {
