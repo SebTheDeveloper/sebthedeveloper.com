@@ -142,7 +142,7 @@ app.get("/demos/cross-country-movers", (_, res) => {
 });
 
 app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "src", "index.html"));
+  res.sendFile(path.join(__dirname, "src", "404.html"));
 });
 
 app.listen(port, () => {
