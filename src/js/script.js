@@ -4,6 +4,7 @@ import chatbot from "./chatbot.js";
 const body = document.querySelector("body");
 const loadingCircle = document.querySelector(".loading-circle");
 const projectModal = document.querySelector(".project-set-modal");
+const projectModalBanner = projectModal.querySelector("#banner");
 const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
 const exitModal = projectModal.querySelector(".exit-modal");
@@ -192,6 +193,8 @@ projectModal.addEventListener("click", (e) => {
 function updateCurrentProject() {
   const project = projectsData[projectIndex];
 
+  projectModalBanner.textContent = project.title;
+
   document.querySelectorAll("h2").forEach((h2) => {
     h2.textContent = project.title;
   });
@@ -293,10 +296,20 @@ function updateCurrentProject() {
 
   projectInfoHtml += `
   <div class="d-flex align-items-center justify-content-center mt-5">
-  <button class="see-next btn btn-primary">View Next Project</button>
+    <button class="see-next btn btn-primary">View Next Project</button>
   </div>`;
+  const projectInfo = document.querySelector(".project-info");
+  projectInfo.innerHTML = projectInfoHtml;
 
-  document.querySelector(".project-info").innerHTML = projectInfoHtml;
+  // setTimeout(() => {
+  //   const hideModal = () => {
+  //     exitModal.click();
+  //     chatQuestionPopup.removeEventListener("click", hideModal);
+  //   };
+
+  //   const chatQuestionPopup = projectInfo.querySelector("#chat-question");
+  //   chatQuestionPopup.addEventListener("click", hideModal);
+  // }, 0);
 
   const seeNextBtn = projectModal.querySelector(".see-next");
   seeNextBtn.addEventListener("click", onNextClick);
@@ -322,7 +335,7 @@ function onTransitionEnd() {
 const listenersMap = new Map();
 
 function afterScroll(yPosition, callback) {
-  const listener = (e) => {
+  const listener = () => {
     if (window.scrollY === yPosition) {
       window.removeEventListener("scroll", listenersMap.get(callback));
       listenersMap.delete(callback);
