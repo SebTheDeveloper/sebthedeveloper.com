@@ -3,14 +3,16 @@ import chatbot from "./chatbot.js";
 
 const body = document.querySelector("body");
 const loadingCircle = document.querySelector(".loading-circle");
-const projectModal = document.querySelector(".project-set-modal");
-const projectModalBanner = projectModal.querySelector("#banner");
 const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
-const exitModal = projectModal.querySelector(".exit-modal");
 const main = document.querySelector(".main");
 const contactFormWrapper = document.getElementById("contact");
 const footer = document.querySelector("footer");
+
+const projectModal = document.querySelector(".project-set-modal");
+const projectModalBanner = projectModal.querySelector("#banner");
+const projectModalBannerText = projectModalBanner.querySelector("p");
+const exitModal = projectModal.querySelector(".exit-modal");
 
 let projectIndex = 0;
 
@@ -33,6 +35,8 @@ document.querySelector(".color-fade").onclick = (e) => {
       "rgba(0, 29, 73, var(--backgroundOpacity, 0))"
     );
     exitModal.style.color = "var(--white)";
+    projectModalBanner.style.setProperty("--bannerBackground", "black");
+    projectModalBanner.style.setProperty("--modalBackground", "rgb(8, 8, 8)");
   }
   // Light Mode
   else {
@@ -47,6 +51,11 @@ document.querySelector(".color-fade").onclick = (e) => {
       "rgba(191, 209, 236, var(--backgroundOpacity, 0))"
     );
     exitModal.style.color = "var(--red)";
+    projectModalBanner.style.setProperty(
+      "--bannerBackground",
+      "rgba(220, 220, 220, 0.95)"
+    );
+    projectModalBanner.style.setProperty("--modalBackground", "var(--white)");
   }
   document
     .querySelector(".btn-outline-secondary")
@@ -193,7 +202,14 @@ projectModal.addEventListener("click", (e) => {
 function updateCurrentProject() {
   const project = projectsData[projectIndex];
 
-  projectModalBanner.textContent = project.title;
+  projectModalBannerText.classList.remove("banner-animation");
+  projectModalBannerText.textContent = project.title;
+
+  // Trigger reflow to reset banner animation
+  void projectModalBannerText.offsetHeight;
+
+  projectModalBannerText.classList.add("banner-animation");
+  projectModalBanner.style.display = "flex";
 
   document.querySelectorAll("h2").forEach((h2) => {
     h2.textContent = project.title;
