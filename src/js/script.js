@@ -1,5 +1,6 @@
 import projectsData from "./data/projectsData.js";
 import chatbot from "./chatbot.js";
+import triggerReflow from "../lib/triggerReflow.js";
 
 const body = document.querySelector("body");
 const loadingCircle = document.querySelector(".loading-circle");
@@ -53,7 +54,7 @@ document.querySelector(".color-fade").onclick = (e) => {
     exitModal.style.color = "var(--red)";
     projectModalBanner.style.setProperty(
       "--bannerBackground",
-      "rgba(220, 220, 220, 0.95)"
+      "rgba(220, 220, 220, 0.9)"
     );
     projectModalBanner.style.setProperty("--modalBackground", "var(--white)");
   }
@@ -202,17 +203,16 @@ projectModal.addEventListener("click", (e) => {
 function updateCurrentProject() {
   const project = projectsData[projectIndex];
 
-  projectModalBannerText.classList.remove("banner-animation");
   projectModalBannerText.textContent = project.title;
-
-  // Trigger reflow to reset banner animation
-  void projectModalBannerText.offsetHeight;
-
-  projectModalBannerText.classList.add("banner-animation");
+  triggerReflow(projectModalBannerText, "banner-animation");
   projectModalBanner.style.display = "flex";
 
   document.querySelectorAll("h2").forEach((h2) => {
     h2.textContent = project.title;
+
+    if (h2.id === "main-project-h2") {
+      triggerReflow(h2, "h2-animation");
+    }
   });
 
   document.querySelector(".img-carousel").src = project.img;
