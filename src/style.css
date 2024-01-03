@@ -359,6 +359,7 @@ footer,
   font-size: 1.5rem;
   padding: 0 1.5rem 1rem;
   min-width: 300px;
+  min-height: 7.25rem;
 }
 .h2-animation {
   animation: slide-left 0.5s ease-in-out;
@@ -372,7 +373,7 @@ footer,
   --chatBackground: var(--localGrey);
   display: none;
   min-height: 100vh;
-  padding: 35vh 0 45vh;
+  padding: 30vh 0 45vh;
   max-width: 1000px;
   margin: 0 auto;
   font-size: 1.15em;
@@ -641,9 +642,10 @@ footer p {
 footer .lead a {
   text-decoration: none;
   color: inherit;
+  text-shadow: 0 0 3px var(--white);
 }
 footer .lead a:hover {
-  text-shadow: 0 0 4px var(--white);
+  text-shadow: 0 0 3px var(--primary-blue);
 }
 @keyframes fade-in {
   0% {
