@@ -17,6 +17,7 @@ html {
 body {
   background-color: var(--white) !important;
   transition: background-color 0.5s ease-in-out;
+  overflow-x: hidden;
 }
 .loading-circle {
   display: none;
@@ -77,6 +78,7 @@ header > * {
   align-items: center;
   padding: 5rem 0rem 4rem;
   gap: 1rem;
+  overflow-x: hidden;
 }
 .project-set-modal #banner {
   --charLength: 22ch;
@@ -216,11 +218,12 @@ h1 {
   position: relative;
   display: inline-block;
   margin: 1.5rem 0 3rem !important;
-  font-family: "Roboto Mono", monospace;
   font-weight: 400;
   min-height: 1em;
   pointer-events: none;
+  animation: fade-in 0.8s ease-in-out;
 }
+/* --psuedoBackground set in JS */
 h1::before {
   content: "";
   position: absolute;
@@ -334,6 +337,15 @@ img.color-fade:hover {
   box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
   background-color: #00000000;
 }
+.who-is-seb {
+  font-family: "Poppins";
+  font-weight: 300;
+  letter-spacing: 0.8px;
+  max-width: 550px;
+  opacity: 0.9;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+}
 img.view-project-btn {
   transition: all 0.3s linear;
   width: var(--modal-width);
@@ -357,9 +369,9 @@ footer,
   opacity: 0.95;
   letter-spacing: 2px;
   font-size: 1.5rem;
-  padding: 0 1.5rem 1rem;
+  padding: 1.5rem 1.5rem 1rem;
   min-width: 300px;
-  min-height: 7.25rem;
+  min-height: 4.75em;
 }
 .h2-animation {
   animation: slide-left 0.5s ease-in-out;
@@ -726,6 +738,9 @@ footer .lead a:hover {
   }
 }
 @media screen and (max-width: 1300px) {
+  h1.display-4 {
+    font-size: calc(1.5rem + 4vw) !important;
+  }
   #contact {
     flex-direction: column;
     padding-top: 8rem;
@@ -759,8 +774,6 @@ footer .lead a:hover {
     justify-content: center;
     flex-direction: row;
     gap: 0.75rem !important;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem !important;
   }
   #project-button {
     font-size: 1.1rem;

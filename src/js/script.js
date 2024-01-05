@@ -3,6 +3,8 @@ import chatbot from "./chatbot.js";
 import triggerReflow from "../lib/triggerReflow.js";
 
 const body = document.querySelector("body");
+const h1 = document.querySelector("h1");
+const mainProjectH2 = document.getElementById("main-project-h2");
 const loadingCircle = document.querySelector(".loading-circle");
 const logo = document.querySelector(".logo");
 const nextBtn = document.querySelector(".see-next");
@@ -20,7 +22,6 @@ let projectIndex = 0;
 document.querySelector(".color-fade").onclick = (e) => {
   body.classList.toggle("color-mode-toggle");
   const root = document.querySelector(":root");
-  const h1 = document.querySelector("h1");
   const chatWrapper = document.querySelector(".chat-wrapper");
 
   // Dark mode
@@ -30,11 +31,9 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "var(--white)");
     root.style.setProperty("--gray", "#585858");
     root.style.setProperty("--foreground", "var(--white)");
+    mainProjectH2.style.textShadow = "0 5px 6px rgba(0,0,0,0.8)";
     chatWrapper.style.setProperty("--chatBackground", "var(--localGrey)");
-    h1.style.setProperty(
-      "--psuedoBackground",
-      "rgba(0, 29, 73, var(--backgroundOpacity, 0))"
-    );
+    h1.style.setProperty("--psuedoBackground", "rgba(0, 40, 101, 0.4)");
     exitModal.style.color = "var(--white)";
     projectModalBanner.style.setProperty("--bannerBackground", "black");
     projectModalBanner.style.setProperty("--modalBackground", "rgb(8, 8, 8)");
@@ -46,11 +45,9 @@ document.querySelector(".color-fade").onclick = (e) => {
     root.style.setProperty("--link-text", "#212529");
     root.style.setProperty("--gray", "#8297b7");
     root.style.setProperty("--foreground", "var(--darkGreyBlue)");
+    mainProjectH2.style.textShadow = "0 5px 6px rgba(0,0,0,0.1)";
     chatWrapper.style.setProperty("--chatBackground", "rgb(15,15,15)");
-    h1.style.setProperty(
-      "--psuedoBackground",
-      "rgba(191, 209, 236, var(--backgroundOpacity, 0))"
-    );
+    h1.style.setProperty("--psuedoBackground", "transparent");
     exitModal.style.color = "var(--red)";
     projectModalBanner.style.setProperty(
       "--bannerBackground",
@@ -109,23 +106,17 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function executeTypewriterSequence() {
-  const h1 = document.querySelector("h1");
-  h1.classList.add("typewriter");
+const executeOpeningSequence = () => {
+  const reveal = () => {
+    h1.style.setProperty("--backgroundOpacity", "0.4");
+    showMain();
 
-  await typeWriterEffect(h1, "Hi, my name is Sebastian.", 50);
-  await delay(1350);
-  await backspaceEffect(h1, 45, 1);
-  await delay(500);
-  await typeWriterEffect(h1, "ere are some projects that I've created:", 50);
+    h1.removeEventListener("animationend", reveal);
+  };
 
-  h1.classList.remove("typewriter");
-  h1.style.setProperty("--backgroundOpacity", "0.4");
-
-  showMain();
-}
-
-executeTypewriterSequence();
+  h1.addEventListener("animationend", reveal);
+};
+executeOpeningSequence();
 
 function showMain(toggleList = null) {
   main.style.display = "block";
@@ -432,6 +423,9 @@ formElement.addEventListener("submit", async (e) => {
   setPreventTouchAndScroll(true);
   loadingCircle.style.display = "flex";
 
+  h1.textContent = "";
+  h1.style.fontFamily = "Roboto Mono, monospace;";
+
   try {
     const response = await fetch("/get-in-touch", {
       method: "POST",
@@ -476,7 +470,6 @@ function formDataToObject(formData) {
 }
 
 async function excecuteTypewriterResponseMessage(message, endingMessage = "") {
-  const h1 = document.querySelector("h1");
   h1.classList.add("typewriter");
 
   const getInTouch = document.querySelector(".col-md-3.text-end a");
