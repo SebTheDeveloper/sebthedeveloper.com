@@ -4,10 +4,10 @@
   --primary-blue: #0d6efd;
   --white: rgb(240, 240, 240);
   --foreground: var(--white);
-  --link-text: #212529;
+  --link-text: var(--white);
   --modal-width: 800px;
   --red: #e70000;
-  --gray: #8297b7;
+  --gray: #585858;
   --darkGreyBlue: rgb(15 16 21);
   font-family: "Poppins", sans-serif;
 }
@@ -212,15 +212,15 @@ body {
   opacity: 0.9;
 }
 h1 {
+  --psuedoBackground: rgba(0, 40, 101, 0.4);
   position: relative;
   display: inline-block;
   margin: 1.5rem 0 3rem !important;
   font-weight: 400;
   min-height: 1em;
   pointer-events: none;
-  animation: fade-in 0.8s ease-in-out;
+  animation: fade-in 0.6s ease-in-out;
 }
-/* --psuedoBackground set in JS */
 h1::before {
   content: "";
   position: absolute;
@@ -233,7 +233,7 @@ h1::before {
   border-radius: 50%;
   filter: blur(50px);
   z-index: -1;
-  transition: background 0.8s 0.2s ease-in-out;
+  transition: background 0.7s 0.2s ease-in-out;
 }
 .typewriter::after {
   content: "";
@@ -368,6 +368,7 @@ footer,
   padding: 1.5rem 1.5rem 1rem;
   min-width: 300px;
   min-height: 4.75em;
+  text-shadow: 0 5px 6px rgba(0, 0, 0, 0.8);
 }
 .h2-animation {
   animation: slide-left 0.5s ease-in-out;

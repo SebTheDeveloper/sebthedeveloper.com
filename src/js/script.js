@@ -63,9 +63,6 @@ document.querySelector(".color-fade").onclick = (e) => {
   });
 };
 
-// Default to dark mode
-document.querySelector(".color-fade").click();
-
 function typeWriterEffect(element, message, interval) {
   return new Promise((resolve) => {
     let index = 0;
@@ -120,6 +117,12 @@ const executeOpeningSequence = () => {
   };
 
   setPreventTouchAndScroll(true);
+
+  setTimeout(() => {
+    const top = document.getElementById("top");
+    top.scrollIntoView({ behavior: "instant" });
+  }, 500);
+
   h1.addEventListener("animationend", reveal);
 };
 executeOpeningSequence();
