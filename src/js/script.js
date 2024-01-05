@@ -108,12 +108,18 @@ function delay(ms) {
 
 const executeOpeningSequence = () => {
   const reveal = () => {
-    h1.style.setProperty("--backgroundOpacity", "0.4");
-    showMain();
-
     h1.removeEventListener("animationend", reveal);
+
+    h1.style.setProperty("--backgroundOpacity", "0.4");
+    main.style.opacity = "1";
+    footer.style.opacity = "1";
+
+    const header = document.querySelector("header");
+    header.style.opacity = "1";
+    setPreventTouchAndScroll(false);
   };
 
+  setPreventTouchAndScroll(true);
   h1.addEventListener("animationend", reveal);
 };
 executeOpeningSequence();
@@ -357,10 +363,6 @@ const loadMainAfterTransition = afterScroll(0, () => {
   main.addEventListener("transitionend", onTransitionEnd);
 });
 
-function preventDefault(e) {
-  e.preventDefault();
-}
-
 function setOpacityOnIntersect(elementNode, tagsToDisplay) {
   const elementsToObserve = elementNode.querySelectorAll(tagsToDisplay);
 
@@ -397,15 +399,19 @@ const chatObserver = new IntersectionObserver(chatObserverCallback, {
 });
 chatObserver.observe(document.getElementById("chat-area"));
 
+function preventDefault(e) {
+  e.preventDefault();
+}
+
 function setPreventTouchAndScroll(isActive = false) {
+  const options = { passive: false };
+
   if (isActive) {
-    window.addEventListener("wheel", preventDefault, { passive: false });
-    window.addEventListener("touchstart", preventDefault, { passive: false });
+    window.addEventListener("wheel", preventDefault, options);
+    window.addEventListener("touchstart", preventDefault, options);
   } else {
-    window.removeEventListener("wheel", preventDefault, { passive: false });
-    window.removeEventListener("touchstart", preventDefault, {
-      passive: false,
-    });
+    window.removeEventListener("wheel", preventDefault, options);
+    window.removeEventListener("touchstart", preventDefault, options);
   }
 }
 

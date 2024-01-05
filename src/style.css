@@ -50,9 +50,6 @@ body {
     transform: rotate(360deg);
   }
 }
-header > * {
-  animation: fade-in 0.6s ease-in-out;
-}
 .color-mode-toggle {
   background-color: var(--darkGreyBlue) !important;
   color: var(--white) !important;
@@ -236,7 +233,7 @@ h1::before {
   border-radius: 50%;
   filter: blur(50px);
   z-index: -1;
-  transition: background 0.8s ease-in-out;
+  transition: background 0.8s 0.2s ease-in-out;
 }
 .typewriter::after {
   content: "";
@@ -272,6 +269,8 @@ header {
   gap: 1rem;
   padding: 0rem 2rem 0rem 2rem;
   border-bottom: var(--bs-border-width) var(--bs-border-style) var(--foreground) !important;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
 header > .mb-2 {
   margin-bottom: 0 !important;
@@ -326,8 +325,6 @@ img.color-fade:hover {
   text-decoration: none;
 }
 #get-in-touch {
-  display: none;
-  animation: fade-in 0.8s ease-in-out;
   border-color: var(--link-text);
   color: var(--link-text);
 }
@@ -361,7 +358,6 @@ footer,
 }
 .main {
   padding-top: 1rem;
-  display: none;
   opacity: 0;
 }
 #main-project-h2 {
@@ -638,7 +634,7 @@ footer,
 }
 footer {
   overflow-y: hidden;
-  display: none;
+  opacity: 0;
   min-height: 400px;
   padding: 6rem 2rem 0;
   letter-spacing: 0.4px;
@@ -646,7 +642,7 @@ footer {
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
   color: var(--white);
   text-align: left;
-  animation: fade-in 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 footer p {
   margin: 0;
@@ -727,16 +723,6 @@ footer .lead a:hover {
     opacity: 0;
   }
 }
-@keyframes grow-in {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-  }
-}
 @media screen and (max-width: 1300px) {
   h1.display-4 {
     font-size: calc(1.5rem + 4vw) !important;
@@ -791,7 +777,7 @@ footer .lead a:hover {
     padding: 0.5em 0.8em 0.5em 0.8em;
     max-height: 0;
     margin-top: 0.5rem;
-    animation: grow-in 0.75s ease-in-out forwards;
+    max-height: 500px;
   }
   #get-in-touch legend {
     font-weight: 600;
