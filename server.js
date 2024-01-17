@@ -47,19 +47,6 @@ app.post("/chatbot", async (req, res) => {
   res.json({ chatbotResponse });
 });
 
-app.get("/download-resume", (_, res) => {
-  const filePath = path.join(__dirname, "src", "resume.pdf");
-  res.download(filePath, "resume.pdf", (err) => {
-    if (err) {
-      if (!res.headersSent) {
-        res
-          .status(500)
-          .send("An error occured while downloading resume. Please try again.");
-      }
-    }
-  });
-});
-
 app.post("/get-in-touch", async (req, res) => {
   /* Will activate spam rejection upon further testing
   
@@ -142,7 +129,7 @@ app.get("/demos/cross-country-movers", (_, res) => {
 });
 
 app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "src", "404.html"));
+  res.status(404).sendFile(path.join(__dirname, "src", "404.html"));
 });
 
 app.listen(port, () => {

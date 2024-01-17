@@ -4,7 +4,7 @@ const projectsData = [
     img: "../../img/projects/news-buddy.png",
     projectType: "Personal Project",
     tech: "React, MongoDB, Node.js, Express, Node Cron, React Markdown, GPT-4/GPT-3.5 Integration, Cheerio, JavaScript, HTML, CSS",
-    liveProjectLink: "https://WebXpert.io",
+    liveProjectLink: "/demos/ai-news-buddy",
     githubLink: "https://github.com/sebthedeveloper/ai-news-scraper",
     videoUrl: "",
     features: [
